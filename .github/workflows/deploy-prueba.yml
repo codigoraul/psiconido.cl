@@ -28,17 +28,22 @@ jobs:
         env:
           SITE_BASE: /prueba
 
-      - name: Subir por FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          security: loose
-          timeout: 120000
-          local-dir: ./dist/
-          # Carpeta destino en el hosting. Si tu usuario FTP ya entra en public_html,
-          # crea el secret FTP_DIR con el valor "prueba/".
-          server-dir: ${{ secrets.FTP_DIR || 'prueba/' }}
+      - name: Subir por FTPS (lftp)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          FTP_DIR: ${{ secrets.FTP_DIR || 'prueba/' }}
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp <<EOF
+          set ftp:ssl-force true
+          set ftp:ssl-protect-data true
+          set ssl:verify-certificate no
+          set net:max-retries 3
+          set net:timeout 30
+          open -u "$FTP_USERNAME","$FTP_PASSWORD" ftp://$FTP_SERVER
+          mkdir -p $FTP_DIR
+          mirror -R --delete --verbose dist/ $FTP_DIR
+          bye
+          EOF
