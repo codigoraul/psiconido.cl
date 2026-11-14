@@ -28,22 +28,34 @@ jobs:
         env:
           SITE_BASE: /prueba
 
-      - name: Subir por FTPS (lftp)
+      - name: Subir al hosting (lftp, prueba 3 modos)
         env:
           FTP_SERVER: ${{ secrets.FTP_SERVER }}
           FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
-          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+          LFTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
           FTP_DIR: ${{ secrets.FTP_DIR || 'prueba/' }}
         run: |
-          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
-          lftp <<EOF
-          set ftp:ssl-force true
-          set ftp:ssl-protect-data true
-          set ssl:verify-certificate no
-          set net:max-retries 3
-          set net:timeout 30
-          open -u "$FTP_USERNAME","$FTP_PASSWORD" ftp://$FTP_SERVER
-          mkdir -p $FTP_DIR
-          mirror -R --delete --verbose dist/ $FTP_DIR
-          bye
-          EOF
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp > /dev/null
+          subir() {
+            echo "=============== Intento: $1 ==============="
+            lftp -c "
+              set cmd:fail-exit true
+              set net:max-retries 2
+              set net:timeout 25
+              set net:reconnect-interval-base 5
+              set ftp:passive-mode true
+              $2
+              open --env-password -u $FTP_USERNAME ftp://$FTP_SERVER
+              mkdir -f -p $FTP_DIR
+              mirror -R --delete --verbose dist/ $FTP_DIR
+              bye"
+          }
+          if subir "FTPS, datos sin cifrar" "set ftp:ssl-force true; set ftp:ssl-protect-data false; set ssl:verify-certificate no"; then
+            echo "OK: subido por FTPS (datos sin cifrar)"
+          elif subir "FTPS completo con TLS 1.2" "set ftp:ssl-force true; set ftp:ssl-protect-data true; set ssl:verify-certificate no; set ssl:priority NORMAL:-VERS-TLS1.3"; then
+            echo "OK: subido por FTPS completo (TLS 1.2)"
+          elif subir "FTP sin cifrar" "set ftp:ssl-allow no"; then
+            echo "OK: subido por FTP SIN CIFRAR (ultimo recurso)"
+          else
+            echo "Fallaron los 3 modos" && exit 1
+          fi
