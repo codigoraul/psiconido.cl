@@ -36,6 +36,8 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
+          security: loose
+          timeout: 120000
           local-dir: ./dist/
           # Carpeta destino en el hosting. Si tu usuario FTP ya entra en public_html,
           # crea el secret FTP_DIR con el valor "prueba/".
