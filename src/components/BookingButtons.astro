@@ -1,0 +1,27 @@
+---
+import Icon from './Icon.astro';
+import { site, whatsappLink } from '../config/site';
+
+interface Props {
+  dark?: boolean;
+}
+const { dark = false } = Astro.props;
+---
+
+<div class="btn-row">
+  {
+    site.encuadradoUrl && (
+      <a class="btn btn--pink" href={site.encuadradoUrl} target="_blank" rel="noopener noreferrer">
+        <Icon name="calendar" size={20} /> Agenda en Encuadrado
+      </a>
+    )
+  }
+  <a
+    class:list={['btn', site.encuadradoUrl ? 'btn--ghost' : dark ? 'btn--pink' : 'btn--primary']}
+    href={whatsappLink()}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Icon name="chat" size={20} /> Escríbeme por WhatsApp
+  </a>
+</div>

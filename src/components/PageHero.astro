@@ -1,0 +1,94 @@
+---
+import { site, withBase } from '../config/site';
+
+interface Props {
+  title: string;
+  current: string; // nombre de la página en el breadcrumb
+  image: string; // foto de fondo (queda bajo el degradado)
+  path: string; // ruta, ej: '/nosotros/'
+}
+const { title, current, image, path } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Inicio', item: `${site.url}${withBase('/')}` },
+    { '@type': 'ListItem', position: 2, name: current, item: `${site.url}${withBase(path)}` },
+  ],
+};
+---
+
+<section class="phero" style={`--phero-img: url('${withBase(image)}')`}>
+  <div class="container">
+    <nav class="crumbs" aria-label="Migas de pan">
+      <ol>
+        <li><a href={withBase('/')}>Inicio</a></li>
+        <li aria-current="page">{current}</li>
+      </ol>
+    </nav>
+    <h1>{title}</h1>
+    <p class="lead"><slot /></p>
+  </div>
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</section>
+
+<style>
+  .phero {
+    max-height: 300px;
+    overflow: hidden;
+    padding-block: clamp(2rem, 4vw, 3rem);
+    background:
+      radial-gradient(circle at 92% 15%, rgba(248, 166, 200, 0.3), transparent 45%),
+      linear-gradient(100deg, rgba(239, 235, 244, 0.97) 0%, rgba(245, 242, 248, 0.9) 45%, rgba(248, 246, 250, 0.45) 100%),
+      var(--phero-img) center 30% / cover no-repeat;
+    border-bottom: 1px solid var(--line);
+  }
+  .crumbs {
+    margin-bottom: 1rem;
+  }
+  .crumbs ol {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0.35rem 0.9rem;
+    list-style: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+  }
+  .crumbs li {
+    display: inline-flex;
+    align-items: center;
+    color: var(--navy-900);
+  }
+  .crumbs li + li::before {
+    content: '›';
+    margin-inline: 0.55rem;
+    font-size: 1.1rem;
+    line-height: 1;
+    color: var(--cyan-500);
+  }
+  .crumbs a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+  .crumbs a:hover {
+    color: var(--navy-900);
+    text-decoration: underline;
+  }
+  h1 {
+    margin: 0 0 0.35em;
+    font-size: clamp(1.8rem, 3.6vw, 2.75rem);
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .lead {
+    margin: 0;
+    font-size: clamp(1rem, 1.3vw, 1.15rem);
+  }
+</style>

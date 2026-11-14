@@ -1,0 +1,145 @@
+---
+import Icon from './Icon.astro';
+import { nav, site, whatsappLink, withBase } from '../config/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container footer__grid">
+    <div class="footer__brand">
+      <a href={withBase('/')} class="brand" aria-label={`${site.name} — inicio`}>
+        <img class="brand__logo" src={withBase('/logo/psiconido-logo-blanco.svg')} alt="PsicoNido — Ps. Andrea Jara" width="244" height="64" />
+      </a>
+      <p>Un espacio para escucharte, comprenderte y ayudarte a crecer.</p>
+    </div>
+
+    <nav aria-label="Pie de página">
+      <h2 class="footer__title">Navegación</h2>
+      <ul>
+        {nav.map((item) => <li><a href={withBase(item.href)}>{item.label}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      <h2 class="footer__title">Contacto</h2>
+      <ul class="footer__contact">
+        <li>
+          <Icon name="chat" size={18} />
+          <a href={whatsappLink()} target="_blank" rel="noopener noreferrer">
+            WhatsApp {site.phoneDisplay}
+          </a>
+        </li>
+        <li>
+          <Icon name="mail" size={18} />
+          <a href={`mailto:${site.email}`}>{site.email}</a>
+        </li>
+        <li>
+          <Icon name="video" size={18} />
+          <span>Atención {site.modalities.join(' y ').toLowerCase()}</span>
+        </li>
+        {
+          site.instagram && (
+            <li>
+              <Icon name="instagram" size={18} />
+              <a href={site.instagram} target="_blank" rel="noopener noreferrer">
+                Instagram
+              </a>
+            </li>
+          )
+        }
+      </ul>
+    </div>
+  </div>
+
+  <div class="container footer__legal">
+    <p>
+      Si estás viviendo una crisis o una emergencia, llama al <strong>131</strong> (SAMU) o a la
+      Línea de Prevención del Suicidio <strong>*4141</strong>.
+    </p>
+    <p>
+      © {year} {site.name}. Todos los derechos reservados. · Diseño web por
+      <a href="https://diseñopaginas.cl" target="_blank" rel="noopener">DiseñoPaginas.cl</a>
+    </p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    background: var(--navy-900);
+    color: #e6dff0;
+    padding-top: clamp(3rem, 6vw, 4.5rem);
+  }
+  .footer a {
+    color: #e6dff0;
+    text-decoration: none;
+  }
+  .footer a:hover {
+    color: var(--pink-soft);
+    text-decoration: underline;
+  }
+  .footer__grid {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1.4fr;
+    gap: 2.5rem;
+  }
+  .brand__logo {
+    display: block;
+    height: 64px;
+    width: auto;
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+  .brand__text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--white);
+  }
+  .brand__text span {
+    color: var(--pink);
+  }
+  .footer__brand p {
+    margin-top: 1rem;
+    max-width: 32ch;
+  }
+  .footer__title {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink-soft);
+    margin-bottom: 1rem;
+  }
+  .footer ul {
+    display: grid;
+    gap: 0.6rem;
+  }
+  .footer__contact li {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .footer__legal {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-block: 1.75rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.14);
+    font-size: 0.92rem;
+    color: #c9bfd3;
+  }
+  .footer__legal p {
+    margin-bottom: 0.4rem;
+  }
+  .footer__legal strong {
+    color: var(--white);
+  }
+  @media (max-width: 800px) {
+    .footer__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

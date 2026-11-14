@@ -1,0 +1,104 @@
+export interface Area {
+  slug: string;
+  icon: string;
+  image: string;
+  title: string;
+  short: string;
+  long: string;
+  topics: string[];
+}
+
+export const areas: Area[] = [
+  {
+    slug: 'ninos-adolescentes',
+    image: '/img/areas/ninos-adolescentes.jpg',
+    icon: 'sprout',
+    title: 'Niños y adolescentes',
+    short:
+      'Acompañamiento en desarrollo, autoestima, regulación emocional y adaptación.',
+    long:
+      'Acompaño a niños y adolescentes en sus procesos de desarrollo, autoestima, regulación emocional y adaptación, brindando también orientación y apoyo a sus familias.',
+    topics: [
+      'Desarrollo emocional y autoestima',
+      'Regulación emocional',
+      'Adaptación a cambios y nuevas etapas',
+      'Orientación y apoyo a la familia',
+    ],
+  },
+  {
+    slug: 'adultos',
+    image: '/img/areas/adultos.jpg',
+    icon: 'user',
+    title: 'Adultos',
+    short:
+      'Autoconocimiento, crecimiento personal y abordaje de las dificultades emocionales.',
+    long:
+      'Acompaño a adultos en sus procesos de autoconocimiento, crecimiento personal y abordaje de las dificultades emocionales, entregando herramientas para afrontarlas.',
+    topics: [
+      'Autoconocimiento',
+      'Crecimiento personal',
+      'Abordaje de dificultades emocionales',
+      'Herramientas para afrontar lo que estás viviendo',
+    ],
+  },
+  {
+    slug: 'orientacion-familias',
+    image: '/img/areas/orientacion-familias.jpg',
+    icon: 'users',
+    title: 'Orientación a familias',
+    short:
+      'Orientación y apoyo a las familias de niños y adolescentes durante su proceso.',
+    long:
+      'Brindo orientación y apoyo a las familias de niños y adolescentes, porque el bienestar de cada etapa también se construye en conjunto con quienes los rodean.',
+    topics: [
+      'Orientación a madres, padres y cuidadores',
+      'Acompañamiento durante el proceso terapéutico',
+      'Apoyo en etapas de cambio y adaptación',
+    ],
+  },
+  {
+    slug: 'evaluacion-diagnostico',
+    image: '/img/areas/evaluacion-diagnostico.jpg',
+    icon: 'clipboard',
+    title: 'Evaluación y diagnóstico',
+    short:
+      'Evaluación psicológica y diagnóstico en población infantojuvenil y adulta.',
+    long:
+      'Realizo evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil y adulta, a partir de una mirada clínica cuidadosa de cada caso.',
+    topics: [
+      'Evaluación psicológica infantojuvenil y adulta',
+      'Diagnóstico clínico',
+      'Intervención psicoterapéutica',
+    ],
+  },
+];
+
+export const enfoques = [
+  {
+    title: 'Terapia Cognitivo-Conductual',
+    text: 'Para comprender la relación entre pensamientos, emociones y conductas, y desarrollar nuevas herramientas.',
+  },
+  {
+    title: 'Terapia Sistémica',
+    text: 'Una mirada que considera a la persona dentro de su familia y su entorno.',
+  },
+  {
+    title: 'Terapia Dialéctica Conductual (DBT)',
+    text: 'Formación en DBT para el abordaje del Trastorno Límite de la Personalidad (TLP).',
+  },
+];
+
+export const pasos = [
+  {
+    title: 'Agenda tu hora',
+    text: 'Reserva en Encuadrado o escríbeme directamente por WhatsApp.',
+  },
+  {
+    title: 'Elige tu modalidad',
+    text: 'La atención puede ser presencial u online, según lo que te acomode.',
+  },
+  {
+    title: 'Comencemos a tu ritmo',
+    text: 'Consideramos tu historia, tus necesidades y tus tiempos en cada paso del proceso.',
+  },
+];

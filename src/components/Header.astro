@@ -1,0 +1,199 @@
+---
+import Icon from './Icon.astro';
+import { nav, site, whatsappLink, withBase, base } from '../config/site';
+
+const path = Astro.url.pathname.slice(base.length).replace(/\/$/, '') || '/';
+const norm = (s: string) => s.replace(/\/$/, '') || '/';
+const isActive = (href: string) => (norm(href) === '/' ? path === '/' : path.startsWith(norm(href)));
+---
+
+<header class="header">
+  <div class="container header__inner">
+    <a href={withBase('/')} class="brand" aria-label={`${site.name} — inicio`}>
+      <img class="brand__logo" src={withBase('/logo/psiconido-logo.svg')} alt="PsicoNido — Ps. Andrea Jara" width="244" height="64" />
+    </a>
+
+    <button
+      class="menu-btn"
+      type="button"
+      aria-expanded="false"
+      aria-controls="main-nav"
+      data-menu-btn
+    >
+      <span class="menu-btn__open"><Icon name="menu" size={26} /></span>
+      <span class="menu-btn__close"><Icon name="close" size={26} /></span>
+      <span class="sr-only">Abrir menú</span>
+    </button>
+
+    <nav id="main-nav" class="nav" aria-label="Principal" data-nav>
+      <ul>
+        {
+          nav.map((item) => (
+            <li>
+              <a href={withBase(item.href)} aria-current={isActive(item.href) ? 'page' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <a
+        class="btn btn--primary nav__cta"
+        href={whatsappLink()}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Agenda tu hora
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--line);
+  }
+  .header__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block: 1.25rem;
+    gap: 1.5rem;
+  }
+  .brand__logo {
+    display: block;
+    height: 64px;
+    width: auto;
+  }
+  @media (max-width: 520px) {
+    .header__inner {
+      padding-block: 1rem;
+    }
+    .brand__logo {
+      height: 56px;
+    }
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+  }
+  .brand__text {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--navy-900);
+  }
+  .brand__text span {
+    color: var(--pink);
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+  .nav ul {
+    display: flex;
+    gap: 1.75rem;
+  }
+  .nav ul a {
+    position: relative;
+    padding-block: 0.4rem;
+    font-weight: 600;
+    font-size: 0.98rem;
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .nav ul a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--pink);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.2s ease;
+  }
+  .nav ul a:hover::after,
+  .nav ul a[aria-current='page']::after {
+    transform: scaleX(1);
+  }
+  .nav__cta {
+    padding: 0.7rem 1.3rem;
+    font-size: 0.95rem;
+  }
+  .menu-btn {
+    display: none;
+    background: none;
+    border: 0;
+    padding: 0.4rem;
+    color: var(--navy-900);
+    cursor: pointer;
+  }
+  .menu-btn__close {
+    display: none;
+  }
+  .menu-btn[aria-expanded='true'] .menu-btn__open {
+    display: none;
+  }
+  .menu-btn[aria-expanded='true'] .menu-btn__close {
+    display: inline;
+  }
+
+  @media (max-width: 900px) {
+    .menu-btn {
+      display: inline-flex;
+    }
+    .nav {
+      position: absolute;
+      inset: 100% 0 auto 0;
+      display: none;
+      flex-direction: column;
+      align-items: stretch;
+      gap: 1.25rem;
+      padding: 1.5rem var(--gutter) 2rem;
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav.open {
+      display: flex;
+    }
+    .nav ul {
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+    .nav ul a {
+      display: block;
+      padding: 0.8rem 0;
+      font-size: 1.1rem;
+    }
+    .nav__cta {
+      justify-content: center;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.querySelector('[data-menu-btn]');
+  const nav = document.querySelector('[data-nav]');
+  if (btn && nav) {
+    btn.addEventListener('click', () => {
+      const open = nav.classList.toggle('open');
+      btn.setAttribute('aria-expanded', String(open));
+    });
+    nav.querySelectorAll('a').forEach((a) =>
+      a.addEventListener('click', () => {
+        nav.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+      })
+    );
+  }
+</script>

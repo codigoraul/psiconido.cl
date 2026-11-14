@@ -1,0 +1,96 @@
+---
+import type { TeamMember } from '../data/team';
+
+interface Props {
+  member: TeamMember;
+}
+const { member } = Astro.props;
+---
+
+<article class="member">
+  <div class="member__photo" aria-hidden={member.photo ? undefined : 'true'}>
+    {
+      member.photo ? (
+        <img src={member.photo} alt={`Retrato de ${member.name}`} width="400" height="400" loading="lazy" />
+      ) : (
+        <span>{member.initials}</span>
+      )
+    }
+  </div>
+  <div class="member__body">
+    <h3>{member.name}</h3>
+    <p class="member__role">{member.role}</p>
+    {member.bio.map((p) => <p>{p}</p>)}
+    <ul class="member__tags">
+      {member.highlights.map((h) => <li>{h}</li>)}
+    </ul>
+  </div>
+</article>
+
+<style>
+  .member {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 1.75rem;
+    align-items: start;
+    padding: 1.75rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+  }
+  .member__photo {
+    aspect-ratio: 1;
+    border-radius: 50%;
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    background: radial-gradient(circle at 30% 25%, var(--cyan-300), var(--navy-700));
+    color: var(--white);
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 500;
+  }
+  .member__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+  }
+  .member h3 {
+    font-family: var(--font-display);
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 0.15rem;
+  }
+  .member__role {
+    margin-bottom: 0.9rem;
+    font-weight: 700;
+    color: var(--cyan-500);
+  }
+  .member__body p:not(.member__role) {
+    color: var(--muted);
+  }
+  .member__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  .member__tags li {
+    padding: 0.3rem 0.8rem;
+    border-radius: 999px;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    color: var(--navy-700);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  @media (max-width: 640px) {
+    .member {
+      grid-template-columns: 1fr;
+    }
+    .member__photo {
+      width: 130px;
+    }
+  }
+</style>

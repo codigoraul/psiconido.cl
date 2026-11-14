@@ -1,0 +1,360 @@
+---
+import fs from 'node:fs';
+import path from 'node:path';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cityPhrase, withBase } from '../config/site';
+import StepList from '../components/StepList.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import BookingButtons from '../components/BookingButtons.astro';
+import Icon from '../components/Icon.astro';
+import { areas, pasos, enfoques } from '../data/areas';
+import { team } from '../data/team';
+
+// Fotos reales: dejar los archivos en /public y se usan solos.
+//   public/equipo/andrea.jpg → foto de la sección "Sobre mí" (y de Nosotros)
+// El hero usa la foto de niños y adolescentes.
+const exists = (p: string) => fs.existsSync(path.join(process.cwd(), 'public', p));
+const heroImg = withBase('/img/areas/ninos-adolescentes.jpg');
+const andreaPhoto = exists('equipo/andrea-sobre-mi.jpg')
+  ? withBase('/equipo/andrea-sobre-mi.jpg')
+  : exists('equipo/andrea.jpg')
+    ? withBase('/equipo/andrea.jpg')
+    : '';
+
+const hints: Record<string, string> = {
+  'ninos-adolescentes': 'desarrollo, autoestima, emociones',
+  adultos: 'autoconocimiento y crecimiento personal',
+  'orientacion-familias': 'madres, padres y cuidadores',
+  'evaluacion-diagnostico': 'infantojuvenil y adulta',
+};
+
+const andrea = team.find((m) => m.slug === 'andrea-jara')!;
+const colega = team.find((m) => m.slug === 'fernando-palma')!;
+---
+
+<BaseLayout
+  title={`Psicóloga clínica infantil, adolescentes y adultos${cityPhrase} | PsicoNido`}
+  description={`Psicoterapia, evaluación y diagnóstico psicológico para niños, adolescentes y adultos${cityPhrase}. Orientación a padres. Atención presencial y online con Ps. Andrea Jara.`}
+>
+  <section class="hero" style={`--hero-img: url('${heroImg}')`}>
+    <div class="container">
+      <div class="hero__text">
+        <span class="eyebrow">Psicología clínica · Niños, adolescentes y adultos</span>
+        <h1>Tu bienestar emocional es importante en cada etapa de la vida</h1>
+        <p class="lead">
+          Un espacio seguro, cálido y confidencial donde niños, adolescentes y adultos pueden
+          expresar lo que sienten, encontrar herramientas para afrontar sus dificultades y
+          desarrollar recursos que favorezcan su bienestar emocional.
+        </p>
+        <BookingButtons />
+        <ul class="hero__badges">
+          <li><Icon name="shield" size={20} /> Confidencial</li>
+          <li><Icon name="heart" size={20} /> Atención cercana</li>
+          <li><Icon name="video" size={20} /> Presencial y online</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="strip" aria-label="Áreas de atención">
+    <div class="container strip__grid">
+      {
+        areas.map((a) => (
+          <a class="strip__item" href={withBase('/areas-de-atencion/')}>
+            <span class="strip__icon"><Icon name={a.icon} size={30} /></span>
+            <strong>{a.title}</strong>
+            <small>{hints[a.slug]}</small>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container enfoque">
+      <div>
+        <span class="eyebrow">Mi enfoque</span>
+        <h2>Aprender a conocernos es el primer paso</h2>
+        <p class="lead">
+          En un mundo que cambia constantemente, aprender a conocernos, comprender nuestras
+          emociones y fortalecer nuestra salud mental es fundamental.
+        </p>
+        <p>
+          Como psicóloga clínica, te ofrezco una atención cercana, respetuosa y personalizada,
+          considerando la historia, las necesidades y los tiempos de cada persona.
+        </p>
+        <ul class="enfoque__list">
+          {
+            enfoques.map((e) => (
+              <li>
+                <strong>{e.title}</strong>
+                <span>{e.text}</span>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+      <blockquote class="enfoque__quote">
+        Cada persona tiene su historia y sus tiempos. Mi trabajo es acompañarte a tu ritmo.
+      </blockquote>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container about">
+      <div class="about__photo">
+        {
+          andreaPhoto ? (
+            <img src={andreaPhoto} alt="Ps. Andrea Jara Parada" width="572" height="572" loading="lazy" />
+          ) : (
+            <img class="about__placeholder" src={withBase('/logo/psiconido-icono.svg')} alt="" width="160" height="160" />
+          )
+        }
+      </div>
+      <div>
+        <span class="eyebrow">Sobre mí</span>
+        <h2>Ps. Andrea Jara Parada</h2>
+        <p class="lead">
+          Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención
+          psicoterapéutica en población infantojuvenil y adulta.
+        </p>
+        <p>
+          Me he formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia
+          Sistémica y Terapia Dialéctica Conductual (DBT).
+        </p>
+        <p class="about__colleague">
+          <Icon name="users" size={20} />
+          <span>
+            Trabajo junto a <strong>{colega.name}</strong>, psicólogo con más de 20 años de
+            experiencia en la atención de adultos.
+          </span>
+        </p>
+        <p class="more"><a class="btn btn--ghost" href={withBase('/nosotros/')}>Conocer más <Icon name="arrow" size={18} /></a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand">
+    <div class="container">
+      <div class="steps-head">
+        <span class="eyebrow">¿Cómo comenzar?</span>
+        <h2>Agendar es simple</h2>
+        <p class="lead">Puedes reservar en Encuadrado o escribir directamente por WhatsApp.</p>
+      </div>
+      <StepList steps={pasos} />
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(2.5rem, 5vw, 4.25rem);
+    background: #fff;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--hero-img) right center / auto 100% no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, transparent 36%, #000 54%);
+    mask-image: linear-gradient(90deg, transparent 0%, transparent 36%, #000 54%);
+  }
+  .hero__text {
+    max-width: 640px;
+  }
+  .hero__text h1 {
+    margin-bottom: 0.5em;
+  }
+  .hero__text .lead {
+    max-width: 56ch;
+    margin-bottom: 1.75rem;
+  }
+  .hero__badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.5rem;
+    margin-top: 2rem;
+    padding: 0;
+    list-style: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--navy-700);
+  }
+  .hero__badges li {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .strip {
+    background: #fff;
+    border-bottom: 1px solid var(--line);
+  }
+  .strip__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .strip__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 1.75rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    transition: background 0.15s ease;
+  }
+  .strip__item:last-child {
+    border-right: 0;
+  }
+  .strip__item:hover {
+    background: var(--sand);
+    color: var(--ink);
+  }
+  .strip__icon {
+    color: var(--cyan-500);
+    margin-bottom: 0.25rem;
+  }
+  .strip__item strong {
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--navy-900);
+  }
+  .strip__item small {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
+  }
+
+  .enfoque {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .enfoque h2 {
+    margin-bottom: 0.6em;
+  }
+  .enfoque__list {
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 1rem;
+  }
+  .enfoque__list li {
+    display: grid;
+    gap: 0.15rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--pink);
+  }
+  .enfoque__list strong {
+    color: var(--navy-900);
+  }
+  .enfoque__list span {
+    color: var(--muted);
+    font-size: 0.97rem;
+  }
+  .enfoque__quote {
+    margin: 0;
+    padding: clamp(1.75rem, 4vw, 2.75rem);
+    font-family: var(--font-display);
+    font-size: clamp(1.3rem, 2.4vw, 1.7rem);
+    line-height: 1.35;
+    text-align: center;
+    color: var(--navy-900);
+    background: #fff;
+    border: 2px solid var(--pink-soft);
+    border-radius: var(--radius);
+  }
+
+  .about {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+  }
+  .about__photo {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--sand);
+    display: grid;
+    place-items: center;
+  }
+  .about__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .about__photo .about__placeholder {
+    width: 45%;
+    height: auto;
+    object-fit: contain;
+    opacity: 0.9;
+  }
+  .about h2 {
+    margin-bottom: 0.4em;
+  }
+  .about__colleague {
+    display: flex;
+    gap: 0.7rem;
+    align-items: flex-start;
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    font-size: 0.97rem;
+    color: var(--navy-700);
+  }
+  .about__colleague :global(svg) {
+    flex: none;
+    margin-top: 0.2rem;
+    color: var(--cyan-500);
+  }
+  .more {
+    margin: 2rem 0 0;
+  }
+  .steps-head {
+    max-width: 640px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      padding-top: 300px;
+    }
+    .hero::before {
+      inset: 0 0 auto 0;
+      height: 280px;
+      background: var(--hero-img) center top / cover no-repeat;
+      -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+      mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    }
+    .strip__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .strip__item:nth-child(2) {
+      border-right: 0;
+    }
+    .strip__item:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
+    }
+    .enfoque,
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .about__photo {
+      max-width: 340px;
+    }
+  }
+</style>

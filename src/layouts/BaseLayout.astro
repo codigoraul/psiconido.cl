@@ -1,0 +1,96 @@
+---
+import '@fontsource-variable/plus-jakarta-sans';
+import '@fontsource-variable/fraunces';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+import { site, seoKeywords, cityPhrase, withBase, isTestSite } from '../config/site';
+import { areas } from '../data/areas';
+
+interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  noindex?: boolean;
+  keywords?: string[];
+}
+
+const { title, description, image = '/og.png', noindex: noindexProp = false, keywords = seoKeywords } = Astro.props;
+const noindex = noindexProp || isTestSite;
+const canonical = new URL(Astro.url.pathname, site.url).href;
+const ogImage = new URL(withBase(image), site.url).href;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: site.name,
+  url: site.url,
+  description: site.description,
+  image: new URL(withBase('/og.png'), site.url).href,
+  email: site.email,
+  telephone: site.phone,
+  areaServed: site.city ? [site.city, 'CL'] : 'CL',
+  founder: { '@type': 'Person', name: site.owner.name, jobTitle: site.owner.role },
+  knowsAbout: [
+    'Psicología clínica',
+    'Psicología infantojuvenil',
+    'Psicoterapia de adultos',
+    'Evaluación y diagnóstico psicológico',
+    'Terapia cognitivo-conductual',
+    'Terapia sistémica',
+    'Orientación a padres',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Servicios de psicología',
+    itemListElement: areas.map((a) => ({
+      '@type': 'Offer',
+      itemOffered: { '@type': 'Service', name: a.title, description: a.short },
+    })),
+  },
+  availableLanguage: 'es',
+  ...(site.instagram ? { sameAs: [site.instagram] } : {}),
+  ...(site.address
+    ? { address: { '@type': 'PostalAddress', streetAddress: site.address, ...(site.city ? { addressLocality: site.city } : {}), addressCountry: 'CL' } }
+    : {}),
+};
+---
+
+<!doctype html>
+<html lang="es-CL">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="keywords" content={keywords.join(', ')} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#655570" />
+
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="icon" type="image/png" sizes="32x32" href={withBase('/favicon-32.png')} />
+    <link rel="apple-touch-icon" href={withBase('/apple-touch-icon.png')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body>
+    <a class="skip-link" href="#contenido">Saltar al contenido</a>
+    <Header />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Footer />
+    <WhatsAppFloat />
+  </body>
+</html>

@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../config/site';
+---
+
+<BaseLayout title="Página no encontrada | Psiconido" description="La página que buscas no existe." noindex>
+  <section class="section">
+    <div class="container nf">
+      <span class="eyebrow">Error 404</span>
+      <h1>No encontramos esta página</h1>
+      <p class="lead">Puede que el enlace haya cambiado. Vuelve al inicio o escríbenos.</p>
+      <div class="btn-row">
+        <a class="btn btn--primary" href={withBase('/')}>Volver al inicio</a>
+        <a class="btn btn--ghost" href={withBase('/contacto/')}>Contacto</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .nf {
+    max-width: 720px;
+    text-align: center;
+  }
+  .nf .btn-row {
+    justify-content: center;
+  }
+</style>

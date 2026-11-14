@@ -1,0 +1,151 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../config/site';
+---
+
+<form class="form card" data-contact-form novalidate>
+  <h2 class="form__title">Cuéntame cómo puedo ayudarte</h2>
+  <p class="form__intro">
+    Completa los datos y se abrirá WhatsApp con tu mensaje listo para enviar. También puedes
+    escribir a <a href={`mailto:${site.email}`}>{site.email}</a>.
+  </p>
+
+  <div class="field">
+    <label for="nombre">Nombre</label>
+    <input id="nombre" name="nombre" type="text" autocomplete="name" required />
+  </div>
+
+  <div class="field">
+    <label for="paciente">¿Para quién es la consulta?</label>
+    <select id="paciente" name="paciente" required>
+      <option value="" disabled selected>Selecciona una opción</option>
+      <option>Para mí (adulto)</option>
+      <option>Para mi hijo/a (niño/a)</option>
+      <option>Para mi hijo/a (adolescente)</option>
+      <option>Orientación para mi familia</option>
+      <option>Otra consulta</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="modalidad">Modalidad</label>
+    <select id="modalidad" name="modalidad">
+      <option>Presencial</option>
+      <option>Online</option>
+      <option>Aún no lo sé</option>
+    </select>
+  </div>
+
+  <div class="field">
+    <label for="mensaje">Mensaje <span>(opcional)</span></label>
+    <textarea id="mensaje" name="mensaje" rows="4"></textarea>
+  </div>
+
+  <p class="form__error" role="alert" hidden data-form-error>
+    Por favor completa tu nombre y para quién es la consulta.
+  </p>
+
+  <button type="submit" class="btn btn--primary">
+    <Icon name="chat" size={20} /> Enviar por WhatsApp
+  </button>
+  <p class="form__note">
+    <Icon name="shield" size={16} /> Tus datos se usan solo para responder tu consulta.
+  </p>
+</form>
+
+<style>
+  .form {
+    display: grid;
+    gap: 1.1rem;
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+  }
+  .form__title {
+    font-size: 1.6rem;
+    margin: 0;
+  }
+  .form__intro {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.98rem;
+  }
+  .field {
+    display: grid;
+    gap: 0.4rem;
+  }
+  label {
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  label span {
+    font-weight: 400;
+    color: var(--muted);
+  }
+  input,
+  select,
+  textarea {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    border: 1.5px solid var(--line);
+    border-radius: var(--radius-sm);
+    background: var(--cream);
+    font: inherit;
+    color: var(--ink);
+  }
+  input:focus,
+  select:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--cyan-500);
+    box-shadow: 0 0 0 4px rgba(121, 80, 179, 0.25);
+  }
+  textarea {
+    resize: vertical;
+  }
+  .form__error {
+    margin: 0;
+    padding: 0.7rem 1rem;
+    border-radius: var(--radius-sm);
+    background: #fdecea;
+    color: #8a2418;
+    font-size: 0.95rem;
+  }
+  .form__note {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .form .btn {
+    justify-self: start;
+  }
+</style>
+
+<script define:vars={{ phone: site.phone }}>
+  const form = document.querySelector('[data-contact-form]');
+  const error = document.querySelector('[data-form-error]');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const data = new FormData(form);
+      const nombre = String(data.get('nombre') || '').trim();
+      const paciente = String(data.get('paciente') || '').trim();
+      if (!nombre || !paciente) {
+        error.hidden = false;
+        return;
+      }
+      error.hidden = true;
+      const mensaje = String(data.get('mensaje') || '').trim();
+      const lines = [
+        'Hola Andrea, me gustaría agendar una hora en Psiconido.',
+        `Mi nombre es ${nombre}.`,
+        `Consulta: ${paciente}.`,
+        `Modalidad: ${data.get('modalidad')}.`,
+      ];
+      if (mensaje) lines.push(mensaje);
+      const url = `https://wa.me/${phone.replace(/\D/g, '')}?text=${encodeURIComponent(lines.join('\n'))}`;
+      window.open(url, '_blank', 'noopener');
+    });
+  }
+</script>

@@ -1,0 +1,29 @@
+---
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<svg
+  class={className}
+  viewBox="0 0 400 400"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  aria-hidden="true"
+>
+  <defs>
+    <radialGradient id="aura-core" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#FDE3EE"></stop>
+      <stop offset="1" stop-color="#F8A6C8"></stop>
+    </radialGradient>
+    <linearGradient id="aura-ring" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C9B2E8"></stop>
+      <stop offset="1" stop-color="#655570"></stop>
+    </linearGradient>
+  </defs>
+  <circle cx="200" cy="200" r="38" fill="url(#aura-core)"></circle>
+  <circle cx="200" cy="200" r="86" stroke="#655570" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="74 26" transform="rotate(-70 200 200)"></circle>
+  <circle cx="200" cy="200" r="132" stroke="#7950B3" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="68 32" transform="rotate(-10 200 200)"></circle>
+  <circle cx="200" cy="200" r="178" stroke="#C9B2E8" stroke-width="10" stroke-linecap="round" pathLength="100" stroke-dasharray="58 42" transform="rotate(50 200 200)"></circle>
+</svg>
