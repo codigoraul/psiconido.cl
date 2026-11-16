@@ -1,5 +1,6 @@
 ---
 import type { TeamMember } from '../data/team';
+import { withBase } from '../config/site';
 
 interface Props {
   member: TeamMember;
@@ -11,7 +12,7 @@ const { member } = Astro.props;
   <div class="member__photo" aria-hidden={member.photo ? undefined : 'true'}>
     {
       member.photo ? (
-        <img src={member.photo} alt={`Retrato de ${member.name}`} width="400" height="400" loading="lazy" />
+        <img src={withBase(member.photo)} alt={`Retrato de ${member.name}`} width="400" height="400" loading="lazy" />
       ) : (
         <span>{member.initials}</span>
       )
