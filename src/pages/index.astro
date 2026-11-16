@@ -61,7 +61,7 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
       {
         areas.map((a) => (
           <a class="strip__item" href={withBase('/areas-de-atencion/')}>
-            <span class="strip__icon"><Icon name={a.icon} size={30} /></span>
+            <span class="strip__icon"><Icon name={a.icon} size={38} /></span>
             <strong>{a.title}</strong>
             <small>{hints[a.slug]}</small>
           </a>
@@ -204,8 +204,8 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.35rem;
-    padding: 1.75rem 1rem;
+    gap: 0.4rem;
+    padding: 2rem 1.25rem;
     text-align: center;
     text-decoration: none;
     color: var(--ink);
@@ -224,12 +224,12 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     margin-bottom: 0.25rem;
   }
   .strip__item strong {
-    font-size: 1rem;
+    font-size: 1.15rem;
     line-height: 1.3;
     color: var(--navy-900);
   }
   .strip__item small {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     line-height: 1.4;
     color: var(--muted);
   }
