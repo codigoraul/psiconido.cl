@@ -7,7 +7,7 @@ import StepList from '../components/StepList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import BookingButtons from '../components/BookingButtons.astro';
 import Icon from '../components/Icon.astro';
-import { areas, pasos, enfoques } from '../data/areas';
+import { areas, pasos } from '../data/areas';
 import { team } from '../data/team';
 
 // Fotos reales: dejar los archivos en /public y se usan solos.
@@ -99,16 +99,6 @@ const rasgos = [
         <p>
           Porque acompañar a tus hijos también significa acompañar a quienes más los aman: su familia.
         </p>
-        <ul class="enfoque__list">
-          {
-            enfoques.map((e) => (
-              <li>
-                <strong>{e.title}</strong>
-                <span>{e.text}</span>
-              </li>
-            ))
-          }
-        </ul>
       </div>
       <blockquote class="enfoque__quote">
         Cada persona tiene su historia y sus tiempos. Mi trabajo es acompañarte a tu ritmo.
@@ -301,26 +291,6 @@ const rasgos = [
     .enfoque__title .br-desktop {
       display: none;
     }
-  }
-  .enfoque__list {
-    margin: 1.75rem 0 0;
-    padding: 0;
-    list-style: none;
-    display: grid;
-    gap: 1rem;
-  }
-  .enfoque__list li {
-    display: grid;
-    gap: 0.15rem;
-    padding-left: 1rem;
-    border-left: 3px solid var(--pink);
-  }
-  .enfoque__list strong {
-    color: var(--navy-900);
-  }
-  .enfoque__list span {
-    color: var(--muted);
-    font-size: 0.97rem;
   }
   .enfoque__quote {
     margin: 0;
