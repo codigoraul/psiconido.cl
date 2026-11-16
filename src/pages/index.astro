@@ -23,26 +23,32 @@ const andreaPhoto = exists('equipo/andrea-sobre-mi.jpg')
 
 const hints: Record<string, string> = {
   'ninos-adolescentes': 'desarrollo, autoestima, emociones',
-  adultos: 'autoconocimiento y crecimiento personal',
   'orientacion-familias': 'madres, padres y cuidadores',
-  'evaluacion-diagnostico': 'infantojuvenil y adulta',
+  'evaluacion-diagnostico': 'población infantojuvenil',
 };
 
 const andrea = team.find((m) => m.slug === 'andrea-jara')!;
 const colega = team.find((m) => m.slug === 'fernando-palma')!;
+
+const rasgos = [
+  { icon: 'heart', title: 'Calidez y compromiso', text: 'Un acompañamiento cercano, humano y respetuoso de cada historia familiar.' },
+  { icon: 'sprout', title: 'Mirada integrativa', text: 'Intervenciones adaptadas a las necesidades emocionales y particulares de cada persona.' },
+  { icon: 'users', title: 'Trabajo con las familias', text: 'Reconozco a los padres como figuras fundamentales en el desarrollo y bienestar emocional de sus hijos.' },
+  { icon: 'graduation', title: 'Formación y actualización continua', text: 'Compromiso con el aprendizaje, la actualización profesional y la supervisión clínica.' },
+];
 ---
 
 <BaseLayout
-  title={`Psicóloga clínica infantil, adolescentes y adultos${cityPhrase} | PsicoNido`}
-  description={`Psicoterapia, evaluación y diagnóstico psicológico para niñas, niños, adolescentes y adultos${cityPhrase}. Orientación a padres. Atención presencial y online con Ps. Andrea Jara.`}
+  title={`Psicóloga clínica infantil y adolescente${cityPhrase} | PsicoNido`}
+  description={`Psicoterapia, evaluación y diagnóstico psicológico para niñas, niños y adolescentes${cityPhrase}. Orientación a padres. Atención presencial y online con Ps. Andrea Jara.`}
 >
   <section class="hero" style={`--hero-img: url('${heroImg}')`}>
     <div class="container">
       <div class="hero__text">
-        <span class="eyebrow">Psicología clínica · Niñas, niños, adolescentes y adultos</span>
+        <span class="eyebrow">Psicología clínica · Niñas, niños y adolescentes</span>
         <h1>Tu bienestar emocional es importante en cada etapa de la vida</h1>
         <p class="lead">
-          Un espacio seguro, cálido y confidencial donde niñas, niños, adolescentes y adultos pueden
+          Un espacio seguro, cálido y confidencial donde niñas, niños y adolescentes pueden
           expresar lo que sienten, encontrar herramientas para afrontar sus dificultades y
           desarrollar recursos que favorezcan su bienestar emocional.
         </p>
@@ -71,10 +77,10 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
   </section>
 
   <section class="section section--sand trama trama--solo">
-    <div class="container enfoque">
+    <div class="container">
+      <h2 class="enfoque__title">Aprender a conocernos y confiar es el primer paso<br class="br-desktop" /> para tu bienestar y el de tu familia</h2>
+      <div class="enfoque">
       <div>
-        <span class="eyebrow">Mi enfoque</span>
-        <h2>Aprender a conocernos es el primer paso</h2>
         <p class="lead">
           En un mundo que cambia constantemente, aprender a conocernos, comprender nuestras
           emociones y fortalecer nuestra salud mental es fundamental.
@@ -97,6 +103,7 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
       <blockquote class="enfoque__quote">
         Cada persona tiene su historia y sus tiempos. Mi trabajo es acompañarte a tu ritmo.
       </blockquote>
+      </div>
     </div>
   </section>
 
@@ -116,17 +123,50 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
         <h2>Ps. Andrea Jara Parada</h2>
         <p class="lead">
           Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención
-          psicoterapéutica en población infantojuvenil y adulta.
+          psicoterapéutica en población infantojuvenil. Mi trabajo se orienta a comprender
+          las necesidades emocionales, conductuales y relacionales de cada persona, considerando
+          también la influencia de su entorno familiar y social.
         </p>
         <p>
-          Me he formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia
-          Sistémica y Terapia Dialéctica Conductual (DBT).
+          Trabajo desde un enfoque integrativo, combinando herramientas de las terapias
+          Cognitivo-Conductual, Sistémica y Dialéctico-Conductual (DBT), adaptando cada intervención
+          a las características y necesidades individuales.
         </p>
+        <p>
+          Tengo especial interés en el desarrollo emocional de niños y adolescentes, fortaleciendo su
+          autoestima, seguridad, autonomía y habilidades de regulación emocional. Asimismo, considero
+          fundamental el acompañamiento a los padres, entregándoles orientación y herramientas que
+          favorezcan una crianza consciente, vínculos saludables y una comunicación familiar positiva.
+        </p>
+        <p>
+          Mi compromiso es ofrecer un espacio cálido, respetuoso, seguro y profesional, donde tanto
+          los niños como sus familias se sientan escuchados, comprendidos y acompañados.
+        </p>
+        <h3 class="rasgos__title">¿Qué me caracteriza?</h3>
+        <ul class="rasgos">
+          {
+            rasgos.map((r) => (
+              <li>
+                <span class="rasgos__icon"><Icon name={r.icon} size={22} /></span>
+                <div>
+                  <h4>{r.title}</h4>
+                  <p>{r.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
         <p class="about__colleague">
-          <Icon name="users" size={20} />
+          {
+            colega.photo ? (
+              <img class="about__colleague-photo" src={withBase(colega.photo)} alt={colega.name} width="56" height="56" loading="lazy" />
+            ) : (
+              <Icon name="users" size={20} />
+            )
+          }
           <span>
             Trabajo junto a <strong>{colega.name}</strong>, psicólogo con más de 20 años de
-            experiencia en la atención de adultos.
+            experiencia en la atención de adultos y terapia de pareja.
           </span>
         </p>
         <p class="more"><a class="btn btn--ghost" href={withBase('/nosotros/')}>Conocer más <Icon name="arrow" size={18} /></a></p>
@@ -198,7 +238,7 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
   }
   .strip__grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   .strip__item {
     display: flex;
@@ -240,8 +280,17 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
   }
-  .enfoque h2 {
-    margin-bottom: 0.6em;
+  .enfoque__title {
+    max-width: none;
+    text-wrap: balance;
+    margin-bottom: 1.25rem;
+    font-size: clamp(1.6rem, 2.6vw, 2.15rem);
+    line-height: 1.2;
+  }
+  @media (max-width: 900px) {
+    .enfoque__title .br-desktop {
+      display: none;
+    }
   }
   .enfoque__list {
     margin: 1.75rem 0 0;
@@ -282,7 +331,12 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
   }
+  .about {
+    align-items: start;
+  }
   .about__photo {
+    position: sticky;
+    top: 6rem;
     aspect-ratio: 1 / 1;
     border-radius: var(--radius);
     overflow: hidden;
@@ -315,6 +369,17 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     font-size: 0.97rem;
     color: var(--navy-700);
   }
+  .about__colleague {
+    align-items: center;
+  }
+  .about__colleague-photo {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 25%;
+  }
   .about__colleague :global(svg) {
     flex: none;
     margin-top: 0.2rem;
@@ -322,6 +387,46 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
   }
   .more {
     margin: 2rem 0 0;
+  }
+  .rasgos__title {
+    margin: 2.25rem 0 1.25rem;
+  }
+  .rasgos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rasgos li {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .rasgos__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--sand);
+    color: var(--navy-700);
+  }
+  .rasgos h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1.02rem;
+  }
+  .rasgos p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  @media (max-width: 640px) {
+    .rasgos {
+      grid-template-columns: 1fr;
+    }
   }
   .steps-head {
     max-width: 640px;
@@ -340,20 +445,12 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
       -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
       mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
     }
-    .strip__grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .strip__item:nth-child(2) {
-      border-right: 0;
-    }
-    .strip__item:nth-child(-n + 2) {
-      border-bottom: 1px solid var(--line);
-    }
     .enfoque,
     .about {
       grid-template-columns: 1fr;
     }
     .about__photo {
+      position: static;
       max-width: 340px;
     }
   }

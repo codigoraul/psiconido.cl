@@ -16,20 +16,21 @@ export const team: TeamMember[] = [
     initials: 'AJ',
     photo: '/equipo/andrea.jpg',
     bio: [
-      'Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil y adulta.',
+      'Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil.',
       'Se ha formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia Sistémica y Terapia Dialéctica Conductual (DBT) en Trastorno Límite de la Personalidad (TLP).',
     ],
-    highlights: ['Niñas, niños y adolescentes', 'Adultos', 'Presencial y online'],
+    highlights: ['Niñas, niños y adolescentes', 'Orientación a familias', 'Presencial y online'],
   },
   {
     slug: 'fernando-palma',
     name: 'Fernando Palma',
     role: 'Psicólogo',
     initials: 'FP',
+    photo: '/equipo/fernando.jpg',
     bio: [
-      'Psicólogo con más de 20 años de experiencia en la atención psicológica de adultos.',
+      'Psicólogo con más de 20 años de experiencia en la atención psicológica de adultos y terapia de pareja.',
       'Su trayectoria enriquece cada proceso terapéutico dentro del equipo de Psiconido.',
     ],
-    highlights: ['Adultos', 'Más de 20 años de experiencia'],
+    highlights: ['Adultos', 'Terapia de pareja', 'Más de 20 años de experiencia'],
   },
 ];

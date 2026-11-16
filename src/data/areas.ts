@@ -19,26 +19,17 @@ export const areas: Area[] = [
     long:
       'Acompaño a niñas, niños y adolescentes en sus procesos de desarrollo, autoestima, regulación emocional y adaptación, brindando también orientación y apoyo a sus familias.',
     topics: [
-      'Desarrollo emocional y autoestima',
-      'Regulación emocional',
-      'Adaptación a cambios y nuevas etapas',
+      'Desarrollo emocional',
+      'Autoestima',
+      'Manejo y reconocimiento de emociones',
+      'Ansiedad y estrés',
+      'Duelo',
+      'Bullying',
+      'Depresión',
+      'Autolesiones',
+      'Ideación suicida',
+      'Trastorno Límite de la Personalidad (TLP)',
       'Orientación y apoyo a la familia',
-    ],
-  },
-  {
-    slug: 'adultos',
-    image: '/img/areas/adultos.jpg',
-    icon: 'user',
-    title: 'Adultos',
-    short:
-      'Autoconocimiento, crecimiento personal y abordaje de las dificultades emocionales.',
-    long:
-      'Acompaño a adultos en sus procesos de autoconocimiento, crecimiento personal y abordaje de las dificultades emocionales, entregando herramientas para afrontarlas.',
-    topics: [
-      'Autoconocimiento',
-      'Crecimiento personal',
-      'Abordaje de dificultades emocionales',
-      'Herramientas para afrontar lo que estás viviendo',
     ],
   },
   {
@@ -51,9 +42,11 @@ export const areas: Area[] = [
     long:
       'Brindo orientación y apoyo a las familias de niñas, niños y adolescentes, porque el bienestar de cada etapa también se construye en conjunto con quienes los rodean.',
     topics: [
-      'Orientación a madres, padres y cuidadores',
-      'Acompañamiento durante el proceso terapéutico',
-      'Apoyo en etapas de cambio y adaptación',
+      'Crianza y competencias parentales',
+      'Gestión emocional y vínculos familiares',
+      'Dificultades conductuales y emocionales',
+      'Familia y desarrollo infantil',
+      'Autocuidado y bienestar parental',
     ],
   },
   {
@@ -62,11 +55,11 @@ export const areas: Area[] = [
     icon: 'clipboard',
     title: 'Evaluación y diagnóstico',
     short:
-      'Evaluación psicológica y diagnóstico en población infantojuvenil y adulta.',
+      'Evaluación psicológica y diagnóstico en población infantojuvenil.',
     long:
-      'Realizo evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil y adulta, a partir de una mirada clínica cuidadosa de cada caso.',
+      'Realizo evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil, a partir de una mirada clínica cuidadosa de cada caso.',
     topics: [
-      'Evaluación psicológica infantojuvenil y adulta',
+      'Evaluación psicológica infantojuvenil',
       'Diagnóstico clínico',
       'Intervención psicoterapéutica',
     ],

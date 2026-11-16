@@ -10,11 +10,11 @@ import { site, cityPhrase, withBase } from '../config/site';
 ---
 
 <BaseLayout
-  title={`Psicología infantil, adolescentes y adultos${cityPhrase} | PsicoNido`}
-  description={`Psicoterapia infantil y adolescente, psicoterapia de adultos, evaluación y diagnóstico psicológico y orientación a padres. Atención presencial y online.`}
+  title={`Psicología infantil y adolescente${cityPhrase} | PsicoNido`}
+  description={`Psicoterapia infantil y adolescente, evaluación y diagnóstico psicológico y orientación a padres. Atención presencial y online.`}
 >
   <PageHero title="Acompañamiento para cada etapa de la vida" current="Áreas de atención" path="/areas-de-atencion/" image="/img/adolescentes-banner.jpg" side>
-    Niñas, niños, adolescentes y adultos, de forma presencial u online.
+    Niñas, niños y adolescentes, de forma presencial u online.
   </PageHero>
 
   <section class="section">
@@ -29,7 +29,7 @@ import { site, cityPhrase, withBase } from '../config/site';
             <img class="area__photo" src={withBase(a.image)} alt="" loading="lazy" width="1200" height="800" />
             <div class="area__body">
               <p class="lead">{a.long}</p>
-              <ul class="topics">
+              <ul class:list={["topics", { "topics--cols": a.topics.length > 6 }]}>
                 {a.topics.map((t) => <li><Icon name="check" size={18} /> {t}</li>)}
               </ul>
             </div>
@@ -162,6 +162,21 @@ import { site, cityPhrase, withBase } from '../config/site';
   .topics {
     display: grid;
     gap: 0.65rem;
+  }
+  .topics--cols {
+    display: block;
+    columns: 2;
+    column-gap: 2rem;
+  }
+  .topics--cols li {
+    break-inside: avoid;
+    margin-bottom: 0.65rem;
+    line-height: 1.35;
+  }
+  @media (max-width: 640px) {
+    .topics--cols {
+      columns: 1;
+    }
   }
   .topics li {
     display: flex;
