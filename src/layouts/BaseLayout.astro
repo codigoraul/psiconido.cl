@@ -84,7 +84,7 @@ const jsonLd = {
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
-  <body>
+  <body style={`--trama: url('${withBase('/img/nido-trama.svg')}')`}>
     <a class="skip-link" href="#contenido">Saltar al contenido</a>
     <Header />
     <main id="contenido">

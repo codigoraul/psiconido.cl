@@ -294,3 +294,46 @@ ul {
     transition: none !important;
   }
 }
+
+/* Textura organica: hebras del nido del logo como marca de agua */
+.trama {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+.trama::before,
+.trama::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  aspect-ratio: 1;
+  background: var(--trama) center / contain no-repeat;
+  pointer-events: none;
+}
+.trama::before {
+  width: clamp(260px, 34vw, 520px);
+  right: -6%;
+  bottom: -28%;
+  opacity: 0.13;
+}
+.trama::after {
+  width: clamp(180px, 22vw, 340px);
+  left: -5%;
+  top: -18%;
+  opacity: 0.1;
+  transform: rotate(160deg);
+}
+.trama--izq::before {
+  right: auto;
+  left: -7%;
+  transform: scaleX(-1);
+}
+.trama--izq::after {
+  left: auto;
+  right: -4%;
+  transform: rotate(200deg);
+}
+/* Un solo nido, abajo a la derecha (para secciones con texto a la izquierda) */
+.trama--solo::after {
+  display: none;
+}

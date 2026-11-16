@@ -6,8 +6,9 @@ interface Props {
   current: string; // nombre de la página en el breadcrumb
   image: string; // foto de fondo (queda bajo el degradado)
   path: string; // ruta, ej: '/nosotros/'
+  side?: boolean; // true: la foto va nítida a la derecha, a toda la altura, en vez de cubrir el fondo
 }
-const { title, current, image, path } = Astro.props;
+const { title, current, image, path, side = false } = Astro.props;
 
 const jsonLd = {
   '@context': 'https://schema.org',
@@ -19,7 +20,7 @@ const jsonLd = {
 };
 ---
 
-<section class="phero" style={`--phero-img: url('${withBase(image)}')`}>
+<section class:list={['phero', { 'phero--side': side }]} style={`--phero-img: url('${withBase(image)}')`}>
   <div class="container">
     <nav class="crumbs" aria-label="Migas de pan">
       <ol>
@@ -43,6 +44,30 @@ const jsonLd = {
       linear-gradient(100deg, rgba(239, 235, 244, 0.97) 0%, rgba(245, 242, 248, 0.9) 45%, rgba(248, 246, 250, 0.45) 100%),
       var(--phero-img) center 30% / cover no-repeat;
     border-bottom: 1px solid var(--line);
+  }
+  /* Variante: foto grande a la derecha que se desvanece hacia el texto (sin borde cortado) */
+  .phero--side {
+    position: relative;
+    isolation: isolate;
+    background: #f3f0f7;
+  }
+  .phero--side::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 auto;
+    z-index: -1;
+    width: min(72%, 1200px);
+    background: var(--phero-img) center 12% / cover no-repeat;
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 30%, #000 60%);
+    mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 0.22) 30%, #000 60%);
+  }
+  @media (max-width: 900px) {
+    .phero--side::before {
+      width: 100%;
+      opacity: 0.16;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
   }
   .crumbs {
     margin-bottom: 1rem;

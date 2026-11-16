@@ -6,9 +6,9 @@
 export const site = {
   name: 'PsicoNido',
   url: 'https://psiconido.cl',
-  tagline: 'Psicología clínica para niños, adolescentes y adultos',
+  tagline: 'Psicología clínica para niñas, niños, adolescentes y adultos',
   description:
-    'Psiconido: atención psicológica clínica para niños, adolescentes y adultos, de forma presencial y online. Un espacio seguro, cálido y confidencial para tu bienestar emocional.',
+    'Psiconido: atención psicológica clínica para niñas, niños, adolescentes y adultos, de forma presencial y online. Un espacio seguro, cálido y confidencial para tu bienestar emocional.',
 
   owner: {
     name: 'Andrea Jara Parada',

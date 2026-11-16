@@ -13,11 +13,11 @@ export const areas: Area[] = [
     slug: 'ninos-adolescentes',
     image: '/img/areas/ninos-adolescentes.jpg',
     icon: 'sprout',
-    title: 'Niños y adolescentes',
+    title: 'Niñas, niños y adolescentes',
     short:
       'Acompañamiento en desarrollo, autoestima, regulación emocional y adaptación.',
     long:
-      'Acompaño a niños y adolescentes en sus procesos de desarrollo, autoestima, regulación emocional y adaptación, brindando también orientación y apoyo a sus familias.',
+      'Acompaño a niñas, niños y adolescentes en sus procesos de desarrollo, autoestima, regulación emocional y adaptación, brindando también orientación y apoyo a sus familias.',
     topics: [
       'Desarrollo emocional y autoestima',
       'Regulación emocional',
@@ -47,9 +47,9 @@ export const areas: Area[] = [
     icon: 'users',
     title: 'Orientación a familias',
     short:
-      'Orientación y apoyo a las familias de niños y adolescentes durante su proceso.',
+      'Orientación y apoyo a las familias de niñas, niños y adolescentes durante su proceso.',
     long:
-      'Brindo orientación y apoyo a las familias de niños y adolescentes, porque el bienestar de cada etapa también se construye en conjunto con quienes los rodean.',
+      'Brindo orientación y apoyo a las familias de niñas, niños y adolescentes, porque el bienestar de cada etapa también se construye en conjunto con quienes los rodean.',
     topics: [
       'Orientación a madres, padres y cuidadores',
       'Acompañamiento durante el proceso terapéutico',

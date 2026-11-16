@@ -19,7 +19,7 @@ export const team: TeamMember[] = [
       'Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil y adulta.',
       'Se ha formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia Sistémica y Terapia Dialéctica Conductual (DBT) en Trastorno Límite de la Personalidad (TLP).',
     ],
-    highlights: ['Niños y adolescentes', 'Adultos', 'Presencial y online'],
+    highlights: ['Niñas, niños y adolescentes', 'Adultos', 'Presencial y online'],
   },
   {
     slug: 'fernando-palma',

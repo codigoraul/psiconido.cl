@@ -29,12 +29,27 @@ const {
     max-width: 920px;
     margin-inline: auto;
     padding: clamp(2rem, 5vw, 3.5rem) clamp(1.5rem, 5vw, 4rem);
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
     text-align: center;
     background:
       radial-gradient(circle at 92% 10%, rgba(248, 166, 200, 0.3), transparent 45%),
       linear-gradient(120deg, #efebf4 0%, #f8f6fa 60%, #fff 100%);
     border: 1px solid var(--line);
     border-radius: calc(var(--radius) + 8px);
+  }
+  .cta__card::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    width: clamp(220px, 30vw, 380px);
+    aspect-ratio: 1;
+    left: -7%;
+    bottom: -32%;
+    background: var(--trama) center / contain no-repeat;
+    opacity: 0.2;
+    pointer-events: none;
   }
   .cta__card h2 {
     max-width: 24ch;

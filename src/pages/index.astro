@@ -12,9 +12,9 @@ import { team } from '../data/team';
 
 // Fotos reales: dejar los archivos en /public y se usan solos.
 //   public/equipo/andrea.jpg → foto de la sección "Sobre mí" (y de Nosotros)
-// El hero usa la foto de niños y adolescentes.
+// El hero usa la foto de niñas, niños y adolescentes.
 const exists = (p: string) => fs.existsSync(path.join(process.cwd(), 'public', p));
-const heroImg = withBase('/img/areas/ninos-adolescentes.jpg');
+const heroImg = withBase('/img/hero-2.jpg'); // alternativa: '/img/hero-1.jpg'
 const andreaPhoto = exists('equipo/andrea-sobre-mi.jpg')
   ? withBase('/equipo/andrea-sobre-mi.jpg')
   : exists('equipo/andrea.jpg')
@@ -34,15 +34,15 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
 
 <BaseLayout
   title={`Psicóloga clínica infantil, adolescentes y adultos${cityPhrase} | PsicoNido`}
-  description={`Psicoterapia, evaluación y diagnóstico psicológico para niños, adolescentes y adultos${cityPhrase}. Orientación a padres. Atención presencial y online con Ps. Andrea Jara.`}
+  description={`Psicoterapia, evaluación y diagnóstico psicológico para niñas, niños, adolescentes y adultos${cityPhrase}. Orientación a padres. Atención presencial y online con Ps. Andrea Jara.`}
 >
   <section class="hero" style={`--hero-img: url('${heroImg}')`}>
     <div class="container">
       <div class="hero__text">
-        <span class="eyebrow">Psicología clínica · Niños, adolescentes y adultos</span>
+        <span class="eyebrow">Psicología clínica · Niñas, niños, adolescentes y adultos</span>
         <h1>Tu bienestar emocional es importante en cada etapa de la vida</h1>
         <p class="lead">
-          Un espacio seguro, cálido y confidencial donde niños, adolescentes y adultos pueden
+          Un espacio seguro, cálido y confidencial donde niñas, niños, adolescentes y adultos pueden
           expresar lo que sienten, encontrar herramientas para afrontar sus dificultades y
           desarrollar recursos que favorezcan su bienestar emocional.
         </p>
@@ -70,7 +70,7 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     </div>
   </section>
 
-  <section class="section section--sand">
+  <section class="section section--sand trama trama--solo">
     <div class="container enfoque">
       <div>
         <span class="eyebrow">Mi enfoque</span>
@@ -134,7 +134,7 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     </div>
   </section>
 
-  <section class="section section--sand">
+  <section class="section section--sand trama trama--izq">
     <div class="container">
       <div class="steps-head">
         <span class="eyebrow">¿Cómo comenzar?</span>
