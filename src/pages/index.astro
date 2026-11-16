@@ -7,7 +7,6 @@ import StepList from '../components/StepList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import BookingButtons from '../components/BookingButtons.astro';
 import Icon from '../components/Icon.astro';
-import SectionHeading from '../components/SectionHeading.astro';
 import { areas, pasos, enfoques } from '../data/areas';
 import { team } from '../data/team';
 
@@ -22,6 +21,12 @@ const andreaPhoto = exists('equipo/andrea-sobre-mi.jpg')
     ? withBase('/equipo/andrea.jpg')
     : '';
 
+const hints: Record<string, string> = {
+  'ninos-adolescentes': 'desarrollo, autoestima, emociones',
+  adultos: 'autoconocimiento y crecimiento personal',
+  'orientacion-familias': 'madres, padres y cuidadores',
+  'evaluacion-diagnostico': 'infantojuvenil y adulta',
+};
 
 const andrea = team.find((m) => m.slug === 'andrea-jara')!;
 const colega = team.find((m) => m.slug === 'fernando-palma')!;
@@ -51,28 +56,17 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     </div>
   </section>
 
-  <section class="section servicios">
-    <div class="container">
-      <SectionHeading
-        eyebrow="Áreas de atención"
-        title="Acompañamiento para cada etapa"
-        lead="Atención presencial y online para niñas, niños, adolescentes, adultos y sus familias."
-      />
-      <div class="servicios__grid">
-        {
-          areas.filter((a) => a.slug !== 'adultos').map((a) => (
-            <a class="servicio" href={withBase(`/areas-de-atencion/#${a.slug}`)}>
-              <img class="servicio__photo" src={withBase(a.image)} alt="" loading="lazy" width="1200" height="800" />
-              <header class="servicio__head">
-                <span class="servicio__icon"><Icon name={a.icon} size={24} /></span>
-                <h3>{a.title}</h3>
-              </header>
-              <p>{a.short}</p>
-              <span class="servicio__more">Conocer más <Icon name="arrow" size={18} /></span>
-            </a>
-          ))
-        }
-      </div>
+  <section class="strip" aria-label="Áreas de atención">
+    <div class="container strip__grid">
+      {
+        areas.map((a) => (
+          <a class="strip__item" href={withBase('/areas-de-atencion/')}>
+            <span class="strip__icon"><Icon name={a.icon} size={30} /></span>
+            <strong>{a.title}</strong>
+            <small>{hints[a.slug]}</small>
+          </a>
+        ))
+      }
     </div>
   </section>
 
@@ -198,77 +192,46 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     gap: 0.45rem;
   }
 
-  .servicios__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1.75rem;
-  }
-  .servicio {
-    display: flex;
-    flex-direction: column;
-    padding: 1.25rem 1.25rem 1.5rem;
-    overflow: hidden;
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow:
-      0 1px 2px rgba(75, 63, 88, 0.04),
-      0 22px 44px -28px rgba(75, 63, 88, 0.28);
-    color: var(--ink);
-    text-decoration: none;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-  .servicio:hover {
-    transform: translateY(-4px);
-    border-color: var(--cyan-300);
-    box-shadow: var(--shadow);
-    color: var(--ink);
-  }
-  .servicio__photo {
-    display: block;
-    width: calc(100% + 2.5rem);
-    max-width: none;
-    height: auto;
-    margin: -1.25rem -1.25rem 0;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-  }
-  .servicio__head {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    margin: 1.25rem 0 0.9rem;
-    padding-bottom: 0.9rem;
+  .strip {
+    background: #fff;
     border-bottom: 1px solid var(--line);
   }
-  .servicio__icon {
-    flex: none;
+  .strip__grid {
     display: grid;
-    place-items: center;
-    width: 46px;
-    height: 46px;
-    border-radius: 13px;
-    background: linear-gradient(135deg, var(--cyan-100), var(--pink-soft));
-    color: var(--navy-700);
+    grid-template-columns: repeat(4, 1fr);
   }
-  .servicio h3 {
-    margin: 0;
-    font-size: 1.2rem;
-    line-height: 1.25;
-  }
-  .servicio p {
-    margin: 0 0 1.25rem;
-    font-size: 0.97rem;
-    color: var(--muted);
-  }
-  .servicio__more {
-    display: inline-flex;
+  .strip__item {
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 0.4rem;
-    margin-top: auto;
-    font-weight: 700;
-    font-size: 0.95rem;
+    gap: 0.35rem;
+    padding: 1.75rem 1rem;
+    text-align: center;
+    text-decoration: none;
+    color: var(--ink);
+    border-right: 1px solid var(--line);
+    transition: background 0.15s ease;
+  }
+  .strip__item:last-child {
+    border-right: 0;
+  }
+  .strip__item:hover {
+    background: var(--sand);
+    color: var(--ink);
+  }
+  .strip__icon {
     color: var(--cyan-500);
+    margin-bottom: 0.25rem;
+  }
+  .strip__item strong {
+    font-size: 1rem;
+    line-height: 1.3;
+    color: var(--navy-900);
+  }
+  .strip__item small {
+    font-size: 0.85rem;
+    line-height: 1.4;
+    color: var(--muted);
   }
 
   .enfoque {
@@ -366,13 +329,6 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
     text-align: center;
   }
 
-  @media (max-width: 860px) {
-    .servicios__grid {
-      grid-template-columns: 1fr;
-      max-width: 480px;
-      margin-inline: auto;
-    }
-  }
   @media (max-width: 900px) {
     .hero {
       padding-top: 300px;
@@ -383,6 +339,15 @@ const colega = team.find((m) => m.slug === 'fernando-palma')!;
       background: var(--hero-img) center top / cover no-repeat;
       -webkit-mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
       mask-image: linear-gradient(180deg, #000 55%, transparent 100%);
+    }
+    .strip__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .strip__item:nth-child(2) {
+      border-right: 0;
+    }
+    .strip__item:nth-child(-n + 2) {
+      border-bottom: 1px solid var(--line);
     }
     .enfoque,
     .about {
