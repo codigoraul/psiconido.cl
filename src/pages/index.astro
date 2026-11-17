@@ -52,6 +52,10 @@ const rasgos = [
           expresar lo que sienten, encontrar herramientas para afrontar sus dificultades y
           desarrollar recursos que favorezcan su bienestar emocional.
         </p>
+        <blockquote class="hero__quote">
+          Cada niño tiene su propia historia, cada familia sus propios desafíos y cada proceso
+          terapéutico merece un acompañamiento único.
+        </blockquote>
         <BookingButtons />
         <ul class="hero__badges">
           <li><Icon name="shield" size={20} /> Confidencial</li>
@@ -129,7 +133,7 @@ const rasgos = [
         </p>
         <p>
           Trabajo desde un enfoque integrativo, combinando herramientas de las terapias
-          Cognitivo-Conductual, Sistémica y Dialéctico-Conductual (DBT), adaptando cada intervención
+          Cognitivo-Conductual, Sistémica, Dialéctico-Conductual (DBT) y de Juego, adaptando cada intervención
           a las características y necesidades individuales.
         </p>
         <p>
@@ -214,6 +218,17 @@ const rasgos = [
   .hero__text .lead {
     max-width: 56ch;
     margin-bottom: 1.75rem;
+  }
+  .hero__quote {
+    max-width: 52ch;
+    margin: 0 0 1.75rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--pink);
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+    line-height: 1.45;
+    color: var(--navy-700);
   }
   .hero__badges {
     display: flex;

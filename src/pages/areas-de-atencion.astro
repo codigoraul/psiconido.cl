@@ -5,7 +5,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import StepList from '../components/StepList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Icon from '../components/Icon.astro';
-import { areas, enfoques, pasos } from '../data/areas';
+import { areas, pasos } from '../data/areas';
 import { site, cityPhrase, withBase } from '../config/site';
 ---
 
@@ -60,26 +60,6 @@ import { site, cityPhrase, withBase } from '../config/site';
           <h3>Atención online</h3>
           <p>Sesiones por videollamada, con la misma cercanía y confidencialidad, desde donde estés.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="container">
-      <SectionHeading
-        eyebrow="Enfoques"
-        title="Formación en distintos enfoques terapéuticos"
-        lead="Cada proceso se adapta a la historia, las necesidades y los tiempos de la persona."
-      />
-      <div class="grid grid--3">
-        {
-          enfoques.map((e) => (
-            <div class="card">
-              <h3>{e.title}</h3>
-              <p class="muted">{e.text}</p>
-            </div>
-          ))
-        }
       </div>
     </div>
   </section>

@@ -17,14 +17,14 @@ export const team: TeamMember[] = [
     photo: '/equipo/andrea.jpg',
     bio: [
       'Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención psicoterapéutica en población infantojuvenil.',
-      'Se ha formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia Sistémica y Terapia Dialéctica Conductual (DBT) en Trastorno Límite de la Personalidad (TLP).',
+      'Se ha formado en Psicopatología Infantojuvenil, Terapia Cognitivo-Conductual, Terapia Sistémica, Terapia Dialéctica Conductual (DBT) en Trastorno Límite de la Personalidad (TLP) y Terapia de Juego.',
     ],
     highlights: ['Niñas, niños y adolescentes', 'Orientación a familias', 'Presencial y online'],
   },
   {
     slug: 'fernando-palma',
     name: 'Fernando Palma',
-    role: 'Psicólogo',
+    role: 'Psicólogo clínico',
     initials: 'FP',
     photo: '/equipo/fernando.jpg',
     bio: [

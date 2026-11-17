@@ -68,15 +68,15 @@ export const areas: Area[] = [
 
 export const enfoques = [
   {
-    title: 'Terapia Cognitivo-Conductual',
-    text: 'Para comprender la relación entre pensamientos, emociones y conductas, y desarrollar nuevas herramientas.',
+    title: 'Terapia Cognitivo-Conductual (TCC)',
+    text: 'Trabajamos la relación entre pensamientos, emociones y conductas, desarrollando herramientas para afrontar dificultades, fortalecer la autoestima y favorecer respuestas más saludables.',
   },
   {
     title: 'Terapia Sistémica',
-    text: 'Una mirada que considera a la persona dentro de su familia y su entorno.',
+    text: 'Comprendemos a cada niño y adolescente dentro de su contexto familiar y social, promoviendo vínculos saludables, una comunicación positiva y la participación de los padres en el proceso terapéutico.',
   },
   {
-    title: 'Terapia Dialéctica Conductual (DBT)',
+    title: 'Terapia Dialéctico-Conductual (DBT)',
     text: 'Formación en DBT para el abordaje del Trastorno Límite de la Personalidad (TLP).',
   },
 ];
