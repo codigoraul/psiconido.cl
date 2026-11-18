@@ -1,5 +1,5 @@
 /**
- * Configuración central de Psiconido.
+ * Configuración central de PsicoNido.
  * Todo dato de contacto, agenda y ubicación se edita SOLO aquí.
  * Más adelante estos valores se pueden leer desde WordPress headless.
  */
@@ -8,7 +8,7 @@ export const site = {
   url: 'https://psiconido.cl',
   tagline: 'Psicología clínica para niñas, niños y adolescentes',
   description:
-    'Psiconido: atención psicológica clínica para niñas, niños y adolescentes, de forma presencial y online. Un espacio seguro, cálido y confidencial para tu bienestar emocional.',
+    'PsicoNido: atención psicológica clínica para niñas, niños y adolescentes, de forma presencial y online. Un espacio seguro, cálido y confidencial para tu bienestar emocional.',
 
   owner: {
     name: 'Andrea Jara Parada',
@@ -20,7 +20,7 @@ export const site = {
   phone: '+56948781574',
   phoneDisplay: '+56 9 4878 1574',
   email: 'psi.andreajarap@gmail.com',
-  whatsappMessage: 'Hola Andrea, me gustaría agendar una hora en Psiconido.',
+  whatsappMessage: 'Hola Andrea, me gustaría agendar una hora en PsicoNido.',
 
   // Agenda online. Pegar aquí el enlace de Encuadrado cuando esté disponible.
   // Mientras esté vacío, el botón de Encuadrado no se muestra.
@@ -67,7 +67,7 @@ export const seoKeywords = [
   'terapia cognitivo-conductual',
   'terapia sistémica',
   'psicología del vínculo',
-  'Psiconido',
+  'PsicoNido',
 ];
 
 /** Prefijo de ruta (vacío en la raíz, "/prueba" en la copia de prueba). */

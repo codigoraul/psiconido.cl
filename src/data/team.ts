@@ -28,8 +28,8 @@ export const team: TeamMember[] = [
     initials: 'FP',
     photo: '/equipo/fernando.jpg',
     bio: [
-      'Psicólogo con más de 20 años de experiencia en la atención psicológica de adultos y terapia de pareja.',
-      'Su trayectoria enriquece cada proceso terapéutico dentro del equipo de Psiconido.',
+      'Psicólogo clínico con más de 20 años de experiencia en la atención psicológica de adultos y terapia de pareja.',
+      'Su trayectoria enriquece cada proceso terapéutico dentro del equipo de PsicoNido.',
     ],
     highlights: ['Adultos', 'Terapia de pareja', 'Más de 20 años de experiencia'],
   },
