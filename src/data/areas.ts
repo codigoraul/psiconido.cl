@@ -79,6 +79,10 @@ export const enfoques = [
     title: 'Terapia Dialéctico-Conductual (DBT)',
     text: 'Formación en DBT para el abordaje del Trastorno Límite de la Personalidad (TLP).',
   },
+  {
+    title: 'Terapia de Juego',
+    text: 'La terapia de juego es una herramienta psicoterapéutica especialmente utilizada en niños y niñas, que permite explorar y comprender su mundo emocional a través del juego, la creatividad, los juguetes, el dibujo y la expresión simbólica.\n\nDesde la mirada psicológica, el juego es el lenguaje natural de la infancia. Muchas veces, los niños no cuentan con las palabras necesarias para expresar lo que sienten, pero pueden comunicar sus emociones, preocupaciones, temores y experiencias mediante sus juegos.',
+  },
 ];
 
 export const pasos = [

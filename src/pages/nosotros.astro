@@ -78,12 +78,12 @@ const valores = [
         title="Un enfoque integrativo, herramientas para cada etapa"
         lead="En PsicoNido trabajamos desde un enfoque integrativo que combina distintas herramientas psicológicas para acompañar a niños, adolescentes y sus familias. Cada proceso terapéutico se adapta a las necesidades individuales, considerando sus emociones, conductas, etapa del desarrollo y entorno familiar."
       />
-      <div class="grid grid--3">
+      <div class="grid grid--2">
         {
           enfoques.map((e) => (
             <div class="card">
               <h3>{e.title}</h3>
-              <p class="muted">{e.text}</p>
+              {e.text.split('\n\n').map((t) => <p class="muted">{t}</p>)}
             </div>
           ))
         }

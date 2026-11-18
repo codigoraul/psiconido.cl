@@ -8,25 +8,25 @@ export const formacion: FormacionGrupo[] = [
   {
     title: 'Formación de base',
     icon: 'graduation',
-    items: ['Licenciada en Psicología Clínica, Universidad UNIACC (2020 – 2025)'],
+    items: ['Licenciada en Psicología Clínica, Universidad UNIACC'],
   },
   {
     title: 'Diplomados',
     icon: 'graduation',
     items: [
-      'Diplomado en Psicopatología en la Infancia y Adolescencia (2025)',
-      'Diplomado en Abordaje en Adicciones (2026)',
+      'Diplomado en Psicopatología en la Infancia y Adolescencia',
+      'Diplomado en Abordaje en Adicciones',
     ],
   },
   {
     title: 'Cursos de especialización',
     icon: 'graduation',
     items: [
-      'Trastorno Límite de la Personalidad desde Terapia Dialéctica Conductual (2026)',
-      'Introducción a la Psicopatología en la Infancia y Adolescencia (40 hr., 2025)',
-      'Estrategias de Intervención en Psicología del Vínculo (40 hr., 2025)',
-      'Herramientas de Evaluación en Infancia Temprana (40 hr., 2025)',
-      'Observación y Mediciones Clínicas para Adolescentes (40 hr., 2025)',
+      'Trastorno Límite de la Personalidad desde Terapia Dialéctica Conductual',
+      'Introducción a la Psicopatología en la Infancia y Adolescencia (40 hr.)',
+      'Estrategias de Intervención en Psicología del Vínculo (40 hr.)',
+      'Herramientas de Evaluación en Infancia Temprana (40 hr.)',
+      'Observación y Mediciones Clínicas para Adolescentes (40 hr.)',
       'Informe Pericial Psicológico Forense para Tribunales de Familia',
     ],
   },
