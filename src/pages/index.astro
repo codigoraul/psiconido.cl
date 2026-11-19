@@ -7,6 +7,7 @@ import StepList from '../components/StepList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import BookingButtons from '../components/BookingButtons.astro';
 import Icon from '../components/Icon.astro';
+import { ayuda, padres } from '../data/ayuda';
 import { areas, pasos } from '../data/areas';
 import { team } from '../data/team';
 
@@ -48,9 +49,9 @@ const rasgos = [
         <span class="eyebrow">Psicología clínica · Niñas, niños y adolescentes</span>
         <h1>Tu bienestar emocional es importante en cada etapa de la vida</h1>
         <p class="lead">
-          Un espacio seguro, cálido y confidencial donde niñas, niños y adolescentes pueden
-          expresar lo que sienten, encontrar herramientas para afrontar sus dificultades y
-          desarrollar recursos que favorezcan su bienestar emocional.
+          Soy Andrea Jara Parada, psicóloga clínica, y acompaño a niños y adolescentes que presentan
+          dificultades emocionales, problemas de conducta, déficit atencional, hiperactividad,
+          ansiedad, baja autoestima o dificultades para relacionarse con los demás.
         </p>
         <blockquote class="hero__quote">
           Cada niño tiene su propia historia, cada familia sus propios desafíos y cada proceso
@@ -77,6 +78,38 @@ const rasgos = [
           </a>
         ))
       }
+    </div>
+  </section>
+
+  <section class="section" id="en-que-puedo-ayudar">
+    <div class="container">
+      <div class="ayuda__head">
+        <span class="eyebrow">Áreas de atención</span>
+        <h2>¿En qué puedo ayudar a tu hijo o hija?</h2>
+        <p class="lead">
+          Mi objetivo es brindar un espacio psicológico seguro, cálido y confidencial, donde cada niño
+          y adolescente pueda expresar lo que siente, comprender sus emociones, fortalecer su autoestima
+          y desarrollar herramientas para enfrentar las dificultades de su vida cotidiana.
+        </p>
+        <p>
+          Además, entrego orientación psicológica a padres y familias, porque entiendo que el bienestar
+          emocional de los hijos también requiere acompañamiento familiar, comunicación efectiva y
+          herramientas de crianza.
+        </p>
+      </div>
+      <div class="ayuda">
+        {
+          ayuda.map((g) => (
+            <article class="ayuda__card">
+              <span class="ayuda__icon"><Icon name={g.icon} size={26} /></span>
+              <h3>{g.title}</h3>
+              <ul class="checks">
+                {g.items.map((t) => <li><Icon name="check" size={18} /> {t}</li>)}
+              </ul>
+            </article>
+          ))
+        }
+      </div>
     </div>
   </section>
 
@@ -107,6 +140,31 @@ const rasgos = [
       <blockquote class="enfoque__quote">
         Cada persona tiene su historia y sus tiempos. Mi trabajo es acompañarte a tu ritmo.
       </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="orientacion-padres">
+    <div class="container">
+      <div class="padres">
+        <div>
+          <span class="eyebrow">Orientación a padres</span>
+          <h2>Psicóloga para padres: orientación y apoyo familiar</h2>
+          <p class="lead">
+            ¿Sientes que tu hijo no te escucha, desafía constantemente las normas, tiene dificultades
+            para obedecer o las discusiones en casa se han vuelto frecuentes?
+          </p>
+          <p>
+            La orientación psicológica para padres permite comprender qué hay detrás de las conductas
+            de los hijos y aprender nuevas estrategias para acompañarlos.
+          </p>
+        </div>
+        <div class="padres__box">
+          <h3>Trabajo con padres y cuidadores en:</h3>
+          <ul class="checks">
+            {padres.map((t) => <li><Icon name="check" size={18} /> {t}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   </section>
@@ -193,6 +251,87 @@ const rasgos = [
 </BaseLayout>
 
 <style>
+  .ayuda__head {
+    max-width: 760px;
+    margin: 0 auto 2.5rem;
+    text-align: center;
+  }
+  .ayuda {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+  .ayuda__card {
+    padding: 1.75rem;
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 2px rgba(75, 63, 88, 0.04), 0 22px 44px -30px rgba(75, 63, 88, 0.25);
+  }
+  .ayuda__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1rem;
+    border-radius: 14px;
+    background: linear-gradient(135deg, var(--cyan-100), var(--pink-soft));
+    color: var(--navy-700);
+  }
+  .ayuda__card h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  .checks {
+    display: grid;
+    gap: 0.6rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .checks li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.55rem;
+    font-size: 0.97rem;
+    line-height: 1.4;
+  }
+  .checks li :global(svg) {
+    flex: none;
+    margin-top: 0.15rem;
+    color: var(--cyan-500);
+  }
+  .padres {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .padres__box {
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 1px 2px rgba(75, 63, 88, 0.04), 0 22px 44px -28px rgba(75, 63, 88, 0.28);
+  }
+  .padres__box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  @media (max-width: 960px) {
+    .ayuda {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .padres {
+      grid-template-columns: 1fr;
+    }
+  }
+  @media (max-width: 640px) {
+    .ayuda {
+      grid-template-columns: 1fr;
+    }
+  }
+
   .hero {
     position: relative;
     isolation: isolate;

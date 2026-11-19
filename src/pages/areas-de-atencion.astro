@@ -5,6 +5,7 @@ import SectionHeading from '../components/SectionHeading.astro';
 import StepList from '../components/StepList.astro';
 import CtaBanner from '../components/CtaBanner.astro';
 import Icon from '../components/Icon.astro';
+import AreaDetail from '../components/AreaDetail.astro';
 import { areas, pasos } from '../data/areas';
 import { site, cityPhrase, withBase } from '../config/site';
 ---
@@ -20,20 +21,8 @@ import { site, cityPhrase, withBase } from '../config/site';
   <section class="section">
     <div class="container areas">
       {
-        areas.map((a, i) => (
-          <article class="area" id={a.slug}>
-            <header class="area__head">
-              <span class="area__icon"><Icon name={a.icon} size={30} /></span>
-              <h2>{a.title}</h2>
-            </header>
-            <img class="area__photo" src={withBase(a.image)} alt="" loading="lazy" width="1200" height="800" />
-            <div class="area__body">
-              <p class="lead">{a.long}</p>
-              <ul class:list={["topics", { "topics--cols": a.topics.length > 6 }]}>
-                {a.topics.map((t) => <li><Icon name="check" size={18} /> {t}</li>)}
-              </ul>
-            </div>
-          </article>
+        areas.map((a) => (
+          <AreaDetail area={a} />
         ))
       }
     </div>
@@ -79,109 +68,19 @@ import { site, cityPhrase, withBase } from '../config/site';
     display: grid;
     gap: 1.5rem;
   }
-  .area {
-    display: grid;
-    grid-template-columns: 0.8fr 1.2fr;
-    gap: 1.5rem 2rem;
-    align-items: start;
-    padding: clamp(1.5rem, 3vw, 2.25rem);
-    background: var(--white);
-    border: 1px solid var(--line);
-    border-radius: var(--radius);
-    box-shadow:
-      0 1px 2px rgba(75, 63, 88, 0.04),
-      0 22px 44px -28px rgba(75, 63, 88, 0.28);
-    scroll-margin-top: 100px;
-  }
-  /* Zigzag: en las tarjetas pares la foto va a la derecha */
-  .area:nth-child(even) {
-    grid-template-columns: 1.2fr 0.8fr;
-  }
-  .area:nth-child(even) .area__photo {
-    order: 2;
-  }
-  .area__head {
-    grid-column: 1 / -1;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding-bottom: 1.25rem;
-    border-bottom: 1px solid var(--line);
-  }
-  .area__photo {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    object-fit: cover;
-    border-radius: 16px;
-    box-shadow: 0 14px 28px -18px rgba(75, 63, 88, 0.45);
-  }
-  .area .area__icon {
-    background: linear-gradient(135deg, var(--cyan-100), var(--pink-soft));
-  }
-  .area__head h2 {
-    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
-    margin: 0;
-  }
-  .area__icon,
   .mode__icon {
     display: grid;
     place-items: center;
     width: 58px;
     height: 58px;
+    margin-bottom: 1rem;
     border-radius: 16px;
     background: var(--cyan-100);
     color: var(--navy-700);
-  }
-  .mode__icon {
-    margin-bottom: 1rem;
-  }
-  .area .lead {
-    margin-bottom: 1.25rem;
-  }
-  .topics {
-    display: grid;
-    gap: 0.65rem;
-  }
-  .topics--cols {
-    display: block;
-    columns: 2;
-    column-gap: 2rem;
-  }
-  .topics--cols li {
-    break-inside: avoid;
-    margin-bottom: 0.65rem;
-    line-height: 1.35;
-  }
-  @media (max-width: 640px) {
-    .topics--cols {
-      columns: 1;
-    }
-  }
-  .topics li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-    font-weight: 500;
-  }
-  .topics li :global(svg) {
-    flex: none;
-    margin-top: 0.22rem;
-    color: var(--cyan-500);
   }
   .mode p,
   .muted {
     margin: 0;
     color: var(--muted);
-  }
-  @media (max-width: 800px) {
-    .area,
-    .area:nth-child(even) {
-      grid-template-columns: 1fr;
-      gap: 1.25rem;
-    }
-    .area:nth-child(even) .area__photo {
-      order: 0;
-    }
   }
 </style>
