@@ -29,6 +29,7 @@ const hints: Record<string, string> = {
 };
 
 const andrea = team.find((m) => m.slug === 'andrea-jara')!;
+const colega = team.find((m) => m.slug === 'fernando-palma')!;
 ---
 
 <BaseLayout
@@ -180,6 +181,19 @@ const andrea = team.find((m) => m.slug === 'andrea-jara')!;
           psicoterapéutica en población infantojuvenil. Mi trabajo se orienta a comprender
           las necesidades emocionales, conductuales y relacionales de cada persona, considerando
           también la influencia de su entorno familiar y social.
+        </p>
+        <p class="about__colleague">
+          {
+            colega.photo ? (
+              <img class="about__colleague-photo" src={withBase(colega.photo)} alt={colega.name} width="56" height="56" loading="lazy" />
+            ) : (
+              <Icon name="users" size={20} />
+            )
+          }
+          <span>
+            Trabajo junto a <strong>{colega.name}</strong>, psicólogo clínico con más de 20 años de
+            experiencia en la atención de adultos y terapia de pareja.
+          </span>
         </p>
         <p class="more"><a class="btn btn--ghost" href={withBase('/sobre-mi/')}>Conocer más sobre mí <Icon name="arrow" size={18} /></a></p>
       </div>
@@ -438,6 +452,29 @@ const andrea = team.find((m) => m.slug === 'andrea-jara')!;
   }
   .about h2 {
     margin-bottom: 0.4em;
+  }
+  .about__colleague {
+    display: flex;
+    gap: 0.85rem;
+    align-items: center;
+    margin-top: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--sand);
+    border-radius: var(--radius-sm);
+    font-size: 0.97rem;
+    color: var(--navy-700);
+  }
+  .about__colleague-photo {
+    flex: none;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 25%;
+  }
+  .about__colleague :global(svg) {
+    flex: none;
+    color: var(--cyan-500);
   }
   .more {
     margin: 2rem 0 0;
