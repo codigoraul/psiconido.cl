@@ -12,7 +12,7 @@ export const ayuda = [
   },
   {
     icon: 'sprout',
-    title: 'Déficit atencional, TDAH e hiperactividad',
+    title: 'Déficit atencional e hiperactividad',
     items: [
       'Dificultades para mantener la atención y concentración.',
       'Problemas para seguir instrucciones y terminar tareas.',
