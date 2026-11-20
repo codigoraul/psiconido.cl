@@ -1,0 +1,273 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { cityPhrase, withBase } from '../config/site';
+import PageHero from '../components/PageHero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import TeamCard from '../components/TeamCard.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Icon from '../components/Icon.astro';
+import { team } from '../data/team';
+import { formacion } from '../data/formacion';
+import { enfoques } from '../data/areas';
+
+const colega = team.find((m) => m.slug === 'fernando-palma')!;
+
+const rasgos = [
+  { icon: 'heart', title: 'Calidez y compromiso', text: 'Un acompañamiento cercano, humano y respetuoso de cada historia familiar.' },
+  { icon: 'sprout', title: 'Mirada integrativa', text: 'Intervenciones adaptadas a las necesidades emocionales y particulares de cada persona.' },
+  { icon: 'users', title: 'Trabajo con las familias', text: 'Reconozco a los padres como figuras fundamentales en el desarrollo y bienestar emocional de sus hijos.' },
+  { icon: 'graduation', title: 'Formación y actualización continua', text: 'Compromiso con el aprendizaje, la actualización profesional y la supervisión clínica.' },
+];
+
+const valores = [
+  { icon: 'heart', title: 'Cercanía', text: 'Una atención cercana, que te hace sentir acompañado desde el primer contacto.' },
+  { icon: 'shield', title: 'Confianza y respeto', text: 'Un espacio seguro, cálido y confidencial.' },
+  { icon: 'users', title: 'Atención personalizada', text: 'Cada historia es única.' },
+];
+---
+
+<BaseLayout
+  title={`Sobre mí: Ps. Andrea Jara, psicóloga clínica infantojuvenil${cityPhrase} | PsicoNido`}
+  description={`Psicóloga clínica con formación en psicopatología infantojuvenil, terapia cognitivo-conductual, sistémica, DBT y terapia de juego. Atención a niños, adolescentes y orientación a padres.`}
+>
+  <PageHero title="Sobre mí" current="Sobre mí" path="/sobre-mi/" image="/img/areas/orientacion-familias.jpg">
+    Ps. Andrea Jara Parada, psicóloga clínica infantojuvenil.
+  </PageHero>
+
+  <section class="section">
+    <div class="container about">
+      <div class="about__photo">
+        <img src={withBase('/equipo/andrea-sobre-mi.jpg')} alt="Ps. Andrea Jara Parada" width="572" height="572" />
+      </div>
+      <div>
+        <span class="eyebrow">Sobre mí</span>
+        <h2>Ps. Andrea Jara Parada</h2>
+        <p class="lead">
+          Psicóloga clínica con experiencia en evaluación, diagnóstico e intervención
+          psicoterapéutica en población infantojuvenil. Mi trabajo se orienta a comprender
+          las necesidades emocionales, conductuales y relacionales de cada persona, considerando
+          también la influencia de su entorno familiar y social.
+        </p>
+        <p>
+          Trabajo desde un enfoque integrativo, combinando herramientas de las terapias
+          Cognitivo-Conductual, Sistémica, Dialéctico-Conductual (DBT) y de Juego, adaptando cada intervención
+          a las características y necesidades individuales.
+        </p>
+        <p>
+          Tengo especial interés en el desarrollo emocional de niños y adolescentes, fortaleciendo su
+          autoestima, seguridad, autonomía y habilidades de regulación emocional. Asimismo, considero
+          fundamental el acompañamiento a los padres, entregándoles orientación y herramientas que
+          favorezcan una crianza consciente, vínculos saludables y una comunicación familiar positiva.
+        </p>
+        <p>
+          Mi compromiso es ofrecer un espacio cálido, respetuoso, seguro y profesional, donde tanto
+          los niños como sus familias se sientan escuchados, comprendidos y acompañados.
+        </p>
+        <h3 class="rasgos__title">¿Qué me caracteriza?</h3>
+        <ul class="rasgos">
+          {
+            rasgos.map((r) => (
+              <li>
+                <span class="rasgos__icon"><Icon name={r.icon} size={22} /></span>
+                <div>
+                  <h4>{r.title}</h4>
+                  <p>{r.text}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--sand trama">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Formación académica"
+        title="Mi formación"
+        lead="Licenciada en Psicología Clínica, con formación continua en psicopatología infantojuvenil, vínculo, evaluación y adicciones."
+      />
+      <div class="grid grid--2">
+        {
+          formacion.map((g) => (
+            <div class="card">
+              <h3 class="group-title"><Icon name={g.icon} size={22} /> {g.title}</h3>
+              <ul class="list">
+                {g.items.map((i) => <li><Icon name="check" size={18} /> <span>{i}</span></li>)}
+              </ul>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Enfoques terapéuticos"
+        title="Un enfoque integrativo, herramientas para cada etapa"
+        lead="Trabajo desde un enfoque integrativo que combina distintas herramientas psicológicas para acompañar a niños, adolescentes y sus familias. Cada proceso terapéutico se adapta a las necesidades individuales, considerando sus emociones, conductas, etapa del desarrollo y entorno familiar."
+      />
+      <div class="grid grid--2">
+        {
+          enfoques.map((e) => (
+            <div class="card">
+              <h3>{e.title}</h3>
+              {e.text.split('\n\n').map((t) => <p class="muted">{t}</p>)}
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--cyan-100 trama trama--izq">
+    <div class="container">
+      <SectionHeading
+        eyebrow="Trabajo en equipo"
+        title="Trabajo junto a Fernando Palma"
+        lead="Psicólogo clínico, colega con más de 20 años de experiencia en la atención de adultos y terapia de pareja, cuya trayectoria enriquece cada proceso terapéutico."
+      />
+      <TeamCard member={colega} />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <SectionHeading eyebrow="Mi forma de trabajar" title="Lo que guía cada proceso" align="center" />
+      <div class="grid grid--3">
+        {
+          valores.map((v) => (
+            <div class="card value">
+              <span class="value__icon"><Icon name={v.icon} size={26} /></span>
+              <h3>{v.title}</h3>
+              <p>{v.text}</p>
+            </div>
+          ))
+        }
+      </div>
+      <p class="tagline">PsicoNido: un espacio para escucharte, comprenderte y ayudarte a crecer.</p>
+    </div>
+  </section>
+
+  <CtaBanner />
+</BaseLayout>
+
+<style>
+  .about {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: start;
+  }
+  .about__photo {
+    position: sticky;
+    top: 6rem;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--sand);
+  }
+  .about__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .about h2 {
+    margin-bottom: 0.4em;
+  }
+  .rasgos__title {
+    margin: 2.25rem 0 1.25rem;
+  }
+  .rasgos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem 1.5rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .rasgos li {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+  .rasgos__icon {
+    display: grid;
+    flex: none;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--sand);
+    color: var(--navy-700);
+  }
+  .rasgos h4 {
+    margin: 0 0 0.25rem;
+    font-size: 1.02rem;
+  }
+  .rasgos p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--muted);
+  }
+  .tagline {
+    margin: 2.5rem 0 0;
+    text-align: center;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--navy-700);
+  }
+  .value__icon {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    margin-bottom: 1rem;
+    border-radius: 14px;
+    background: var(--cyan-100);
+    color: var(--navy-700);
+  }
+  .value p,
+  .muted {
+    margin: 0;
+    color: var(--muted);
+  }
+  .group-title {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--navy-700);
+  }
+  .list {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .list li {
+    display: flex;
+    gap: 0.6rem;
+    align-items: flex-start;
+    font-size: 0.98rem;
+  }
+  .list li :global(svg) {
+    flex: none;
+    margin-top: 0.2rem;
+    color: var(--cyan-500);
+  }
+  @media (max-width: 900px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .about__photo {
+      position: static;
+      max-width: 340px;
+    }
+  }
+  @media (max-width: 640px) {
+    .rasgos {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

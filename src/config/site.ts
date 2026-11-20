@@ -40,7 +40,7 @@ export const site = {
 
 export const nav = [
   { label: 'Inicio', href: '/' },
-  { label: 'Nosotros', href: '/nosotros/' },
+  { label: 'Sobre mí', href: '/sobre-mi/' },
   { label: 'Áreas de atención', href: '/areas-de-atencion/' },
   { label: 'Contacto', href: '/contacto/' },
 ];

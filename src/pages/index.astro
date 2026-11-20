@@ -12,7 +12,7 @@ import { areas, pasos } from '../data/areas';
 import { team } from '../data/team';
 
 // Fotos reales: dejar los archivos en /public y se usan solos.
-//   public/equipo/andrea.jpg → foto de la sección "Sobre mí" (y de Nosotros)
+//   public/equipo/andrea.jpg → foto de la sección "Sobre mí" (y de la página Sobre mí)
 // El hero usa la foto de niñas, niños y adolescentes.
 const exists = (p: string) => fs.existsSync(path.join(process.cwd(), 'public', p));
 const heroImg = withBase('/img/hero-2.jpg'); // alternativa: '/img/hero-1.jpg'
@@ -29,14 +29,6 @@ const hints: Record<string, string> = {
 };
 
 const andrea = team.find((m) => m.slug === 'andrea-jara')!;
-const colega = team.find((m) => m.slug === 'fernando-palma')!;
-
-const rasgos = [
-  { icon: 'heart', title: 'Calidez y compromiso', text: 'Un acompañamiento cercano, humano y respetuoso de cada historia familiar.' },
-  { icon: 'sprout', title: 'Mirada integrativa', text: 'Intervenciones adaptadas a las necesidades emocionales y particulares de cada persona.' },
-  { icon: 'users', title: 'Trabajo con las familias', text: 'Reconozco a los padres como figuras fundamentales en el desarrollo y bienestar emocional de sus hijos.' },
-  { icon: 'graduation', title: 'Formación y actualización continua', text: 'Compromiso con el aprendizaje, la actualización profesional y la supervisión clínica.' },
-];
 ---
 
 <BaseLayout
@@ -189,49 +181,7 @@ const rasgos = [
           las necesidades emocionales, conductuales y relacionales de cada persona, considerando
           también la influencia de su entorno familiar y social.
         </p>
-        <p>
-          Trabajo desde un enfoque integrativo, combinando herramientas de las terapias
-          Cognitivo-Conductual, Sistémica, Dialéctico-Conductual (DBT) y de Juego, adaptando cada intervención
-          a las características y necesidades individuales.
-        </p>
-        <p>
-          Tengo especial interés en el desarrollo emocional de niños y adolescentes, fortaleciendo su
-          autoestima, seguridad, autonomía y habilidades de regulación emocional. Asimismo, considero
-          fundamental el acompañamiento a los padres, entregándoles orientación y herramientas que
-          favorezcan una crianza consciente, vínculos saludables y una comunicación familiar positiva.
-        </p>
-        <p>
-          Mi compromiso es ofrecer un espacio cálido, respetuoso, seguro y profesional, donde tanto
-          los niños como sus familias se sientan escuchados, comprendidos y acompañados.
-        </p>
-        <h3 class="rasgos__title">¿Qué me caracteriza?</h3>
-        <ul class="rasgos">
-          {
-            rasgos.map((r) => (
-              <li>
-                <span class="rasgos__icon"><Icon name={r.icon} size={22} /></span>
-                <div>
-                  <h4>{r.title}</h4>
-                  <p>{r.text}</p>
-                </div>
-              </li>
-            ))
-          }
-        </ul>
-        <p class="about__colleague">
-          {
-            colega.photo ? (
-              <img class="about__colleague-photo" src={withBase(colega.photo)} alt={colega.name} width="56" height="56" loading="lazy" />
-            ) : (
-              <Icon name="users" size={20} />
-            )
-          }
-          <span>
-            Trabajo junto a <strong>{colega.name}</strong>, psicólogo clínico con más de 20 años de
-            experiencia en la atención de adultos y terapia de pareja.
-          </span>
-        </p>
-        <p class="more"><a class="btn btn--ghost" href={withBase('/nosotros/')}>Conocer más <Icon name="arrow" size={18} /></a></p>
+        <p class="more"><a class="btn btn--ghost" href={withBase('/sobre-mi/')}>Conocer más sobre mí <Icon name="arrow" size={18} /></a></p>
       </div>
     </div>
   </section>
@@ -465,9 +415,6 @@ const rasgos = [
     gap: clamp(2rem, 6vw, 5rem);
     align-items: center;
   }
-  .about {
-    align-items: start;
-  }
   .about__photo {
     position: sticky;
     top: 6rem;
@@ -492,75 +439,8 @@ const rasgos = [
   .about h2 {
     margin-bottom: 0.4em;
   }
-  .about__colleague {
-    display: flex;
-    gap: 0.7rem;
-    align-items: flex-start;
-    margin-top: 1.5rem;
-    padding: 1rem 1.25rem;
-    background: var(--sand);
-    border-radius: var(--radius-sm);
-    font-size: 0.97rem;
-    color: var(--navy-700);
-  }
-  .about__colleague {
-    align-items: center;
-  }
-  .about__colleague-photo {
-    flex: none;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    object-fit: cover;
-    object-position: center 25%;
-  }
-  .about__colleague :global(svg) {
-    flex: none;
-    margin-top: 0.2rem;
-    color: var(--cyan-500);
-  }
   .more {
     margin: 2rem 0 0;
-  }
-  .rasgos__title {
-    margin: 2.25rem 0 1.25rem;
-  }
-  .rasgos {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1.25rem 1.5rem;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-  .rasgos li {
-    display: flex;
-    gap: 0.85rem;
-    align-items: flex-start;
-  }
-  .rasgos__icon {
-    display: grid;
-    flex: none;
-    place-items: center;
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    background: var(--sand);
-    color: var(--navy-700);
-  }
-  .rasgos h4 {
-    margin: 0 0 0.25rem;
-    font-size: 1.02rem;
-  }
-  .rasgos p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: var(--muted);
-  }
-  @media (max-width: 640px) {
-    .rasgos {
-      grid-template-columns: 1fr;
-    }
   }
   .steps-head {
     max-width: 640px;
